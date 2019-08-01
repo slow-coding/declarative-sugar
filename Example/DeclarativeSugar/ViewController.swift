@@ -64,6 +64,10 @@ class ViewController: DeclarativeViewController {
         }
     }
     
+    
+    
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         // full reload
