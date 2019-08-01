@@ -1,0 +1,22 @@
+{
+  "name": "DeclarativeSugar",
+  "version": "0.1.0",
+  "summary": "a Flutter-like declarative UI",
+  "description": "a Flutter-like declarative UI syntax sugar base on Swift and UIStackView",
+  "homepage": "https://github.com/623767307@qq.com/DeclarativeSugar",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "623767307@qq.com": "623767307@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/623767307@qq.com/DeclarativeSugar.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "DeclarativeSugar/Classes/**/*"
+}
