@@ -1,2 +1,2 @@
-# DeclarativeSwiftViewController
+# DeclarativeSugar
 a Flutter-like declarative UI syntax sugar  base on Swift and UIStackView
