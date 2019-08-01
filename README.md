@@ -2,14 +2,9 @@
 
 a Flutter-like declarative UI syntax sugar  base on Swift and UIStackView
 
-[![CI Status](https://img.shields.io/travis/623767307@qq.com/DeclarativeSugar.svg?style=flat)](https://travis-ci.org/623767307@qq.com/DeclarativeSugar)
-[![Version](https://img.shields.io/cocoapods/v/DeclarativeSugar.svg?style=flat)](https://cocoapods.org/pods/DeclarativeSugar)
-[![License](https://img.shields.io/cocoapods/l/DeclarativeSugar.svg?style=flat)](https://cocoapods.org/pods/DeclarativeSugar)
-[![Platform](https://img.shields.io/cocoapods/p/DeclarativeSugar.svg?style=flat)](https://cocoapods.org/pods/DeclarativeSugar)
-
 ## Feature
 
-![](2019-08-01-14-42-44.png)
+![](1.png)
 
 - [x] Declarative UI
 - [x] Hide UIStackView complexity, use Flutter-ish API instead
@@ -125,7 +120,7 @@ pod 'DeclarativeSugar'
 
 ## Author
 
-623767307@qq.com, 623767307@qq.com
+Darren Zheng 623767307@qq.com
 
 ## License
 
