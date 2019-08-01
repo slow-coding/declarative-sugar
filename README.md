@@ -105,7 +105,7 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
 ## Code Structure
 
-![](2019-08-01-15-39-46.png)
+![](2019-08-01-15-41-06.png)
 
 ## Example
 
