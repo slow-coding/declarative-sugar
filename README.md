@@ -4,7 +4,7 @@ a Flutter-like declarative UI syntax sugar  base on Swift and UIStackView
 
 ## Feature
 
-![](1.png)
+![](/1.png)
 
 - [x] Declarative UI
 - [x] Hide UIStackView complexity, use Flutter-ish API instead
