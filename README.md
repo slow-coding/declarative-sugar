@@ -103,6 +103,10 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
 ```
 
+## Code Structure
+
+![](2019-08-01-15-39-46.png)
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
