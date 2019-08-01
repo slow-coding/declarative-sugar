@@ -88,7 +88,7 @@ self.rebuild {
 
 ### 4. Update state (incremental with animation)
 
-note: first of all, abstract target controls to local variables
+> note: first of all, abstract target controls to local variables
 
 ``` swift
 UIView.animate(withDuration: 0.5) {
