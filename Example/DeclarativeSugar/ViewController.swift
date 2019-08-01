@@ -24,14 +24,14 @@ class ViewController: DeclarativeViewController {
                 DZRow(
                     crossAxisAlignment: .bottom,
                     children: [
-                        UILabel().then { $0.text = "hello world"; $0.isHidden = self.hide },
+                        UILabel().then { $0.text = "hello world"; $0.isHidden = self.hide }, // label
                         UIView().then {
                             $0.backgroundColor = .red
                             $0.snp.makeConstraints { make in
                                 make.size.equalTo(CGSize(width: 50, height: 100))
                             }
                         },
-                        DZSpacer(40),
+                        DZSpacer(40), //spacer
                         UIView().then {
                             $0.backgroundColor = .blue
                             $0.snp.makeConstraints { make in
@@ -65,9 +65,18 @@ class ViewController: DeclarativeViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.rebuild {
-            self.hide = !self.hide
-        }
+        
+        // full reload
+         self.rebuild {
+              self.hide = !self.hide
+         }
+        
+        // incremental reload
+//        UIView.animate(withDuration: 0.5) {
+//            self.hide = !self.hide
+//            self.context.setSpacing(self.hide ? 50 : 10, for: self.spacer)
+//            self.context.setHidden(self.hide, for: self.label)
+//        }
     }
     
     
