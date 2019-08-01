@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DeclarativeSugar'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'a Flutter-like declarative UI'
 
 # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ a Flutter-like declarative UI syntax sugar base on Swift and UIStackView
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '623767307@qq.com' => '623767307@qq.com' }
-  s.source           = { :git => 'https://github.com/623767307@qq.com/DeclarativeSugar.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/slow-coding/DeclarativeSugar', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
