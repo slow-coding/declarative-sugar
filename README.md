@@ -81,10 +81,8 @@ override func build() -> DZStack {
 ### 3. Update state (full rebuild without animation)
 
 ``` swift
-override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    self.rebuild {
-        self.hide = !self.hide
-    }
+self.rebuild {
+    self.hide = !self.hide
 }
 ```
 
@@ -93,13 +91,11 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 note: first of all, abstract target controls to local variables
 
 ``` swift
-override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    UIView.animate(withDuration: 0.5) {
-        // incremental reload
-        self.hide = !self.hide
-        self.context.setSpacing(self.hide ? 50 : 10, for: self.spacer)
-        self.context.setHidden(self.hide, for: self.label)
-    }
+UIView.animate(withDuration: 0.5) {
+    // incremental reload
+    self.hide = !self.hide
+    self.context.setSpacing(self.hide ? 50 : 10, for: self.spacer)
+    self.context.setHidden(self.hide, for: self.label)
 }
 ```
 
