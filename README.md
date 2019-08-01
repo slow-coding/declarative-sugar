@@ -20,14 +20,14 @@ But I would like to recommend [Then](https://github.com/devxoul/Then) to write m
 
 ## Usage
 
-### 1. inherite `DeclarativeViewController`
+### 1. Inherite `DeclarativeViewController`
 
 ``` swift
 class ViewController: DeclarativeViewController {
 ...
 ```
 
-### 2. provide your own view-hierachy
+### 2. Provide your own view-hierachy
 
 ``` swift
 override func build() -> DZStack {
