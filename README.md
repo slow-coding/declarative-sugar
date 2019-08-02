@@ -86,7 +86,7 @@ self.rebuild {
 }
 ```
 
-### 4. Update state (incremental with animation)
+### 4. Update state (incremental update with animation)
 
 > note: first of all, abstract target controls to local variables
 
