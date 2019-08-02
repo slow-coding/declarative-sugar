@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DeclarativeSugar'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'a Flutter-like declarative UI'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ a Flutter-like declarative UI syntax sugar base on Swift and UIStackView
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'DeclarativeSugar/Classes/**/*'
-  
+  s.swift_versions = '5'
   # s.resource_bundles = {
   #   'DeclarativeSugar' => ['DeclarativeSugar/Assets/*.png']
   # }
