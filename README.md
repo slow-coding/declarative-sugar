@@ -60,7 +60,7 @@ UIView.animate(withDuration: 0.5) {
 
 ## Code Structure
 
-![](2019-08-05-14-27-50.png)
+![](2019-08-05-14-56-05.png)
 
 ## Example
 
