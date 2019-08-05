@@ -149,7 +149,7 @@ Generally, you don't need delegate/datasource pattern
 
 ## Rebuild
 
-### Update state (full rebuild)
+### Update state (reset)
 
 ``` swift
 self.rebuild {
@@ -157,7 +157,7 @@ self.rebuild {
 }
 ```
 
-### Update state (incremental rebuild)
+### Update state (incremental)
 
 ``` swift
 UIView.animate(withDuration: 0.5) {
