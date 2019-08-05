@@ -19,7 +19,7 @@ a Flutter-like declarative syntax sugar based on Swift and UIStackView
 Depolyment: iOS 9, Swift 5
 Dependency: UIKit, *nothing else*.
 
-But I would suggest using [Then](https://github.com/devxoul/Then) for writing cleaner initializer.
+But I would suggest using [Then](https://github.com/devxoul/Then) for writing cleaner initializer.
 
 ## Usage
 
