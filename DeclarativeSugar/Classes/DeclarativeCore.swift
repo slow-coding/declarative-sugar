@@ -4,33 +4,7 @@
 
 import UIKit
 
-open class DeclarativeViewController: UIViewController {
-    open func build() -> DZStack { return DZColumn(children:[]) }
-    open lazy var context: DZContext = DZContext(child: build())
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-        context = DZContext(child: build())
-    }
-    public func rebuild(_ block: () -> Void) {
-        block()
-        context.rootView.removeFromSuperview()
-        context = DZContext(child: build())
-    }
-}
 
-open class DeclarativeView: UIView {
-    open func build() -> DZStack { return DZColumn(children:[]) }
-    open lazy var context: DZContext = DZContext(child: build())
-    override open func draw(_ rect: CGRect) {
-        super.draw(rect)
-        context = DZContext(child: build())
-    }
-    public func rebuild(_ block: () -> Void) {
-        block()
-        context.rootView.removeFromSuperview()
-        context = DZContext(child: build())
-    }
-}
 
 public protocol DZStackItem: UIView {}
 
