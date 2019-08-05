@@ -151,6 +151,9 @@ Generally, you don't need delegate/datasource pattern and UITableViewCell
 #### Dynamic ListView
 
 ``` swift
+
+var models = ["a", "b", "c", "d", "e"]
+
 return DZListView(
     tableView: UITableView(),
     rows: models.map { model in DZListCell(widget: UILabel().then { $0.text = model })})
