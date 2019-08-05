@@ -16,10 +16,8 @@
 - [x] Supoort `ListView` (`UITableView` in UIKit) 2019-08-03
 - [x] Support `Padding` 2019-08-05
 
-## Depolyment & Dependency
-
 **Depolyment**: iOS 9, Swift 5  
-**Dependency**: UIKit (*nothing else*)
+**Dependency**: UIKit (*nothing else*)  
 
 But I would suggest using [Then](https://github.com/devxoul/Then) for writing cleaner initializer.
 
