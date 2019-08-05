@@ -69,7 +69,7 @@ DZColumn(
 
 ### Padding
 
-Set padding for child Widget
+Set padding for child widget
 
 #### only
 
