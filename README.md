@@ -128,7 +128,7 @@ DZColumn(
 
 ## ListView
 
-Generally, you don't need delegate/datasource pattern
+Generally, you don't need delegate/datasource pattern and UITableViewCell
 
 ```
  DZListView(
