@@ -24,7 +24,6 @@
 		5687AEB522F7BE6600C80B1E /* DeclarativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687AEB422F7BE6600C80B1E /* DeclarativeView.swift */; };
 		5687AEB722F7BE8000C80B1E /* DeclarativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687AEB622F7BE8000C80B1E /* DeclarativeViewController.swift */; };
 		5687AEB922F7BEBB00C80B1E /* DeclarativeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687AEB822F7BEBB00C80B1E /* DeclarativeListView.swift */; };
-		5687AEBB22F7CA7A00C80B1E /* UIStackView+DZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687AEBA22F7CA7A00C80B1E /* UIStackView+DZ.swift */; };
 		5C376607904258A10F4DDD6D42EFC491 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D885FEA2698E99E4613EB8B0830A10D /* ConstraintMaker.swift */; };
 		5DBFB9A0499F04CBE806486211A4ABD0 /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7BDAC1B1115E65DECBD8D63A4BBE9D /* SnapKit-dummy.m */; };
 		6551B3BE1562E928D00690DEEF63BD87 /* Pods-DeclarativeSugar_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CA93F69998BCD7D4C49C1BFE8BF112C3 /* Pods-DeclarativeSugar_Example-dummy.m */; };
@@ -120,7 +119,6 @@
 		5687AEB422F7BE6600C80B1E /* DeclarativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclarativeView.swift; sourceTree = "<group>"; };
 		5687AEB622F7BE8000C80B1E /* DeclarativeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclarativeViewController.swift; sourceTree = "<group>"; };
 		5687AEB822F7BEBB00C80B1E /* DeclarativeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclarativeListView.swift; sourceTree = "<group>"; };
-		5687AEBA22F7CA7A00C80B1E /* UIStackView+DZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+DZ.swift"; sourceTree = "<group>"; };
 		5CCB8A6A72C185ABE636A6BD35B044F3 /* Pods-DeclarativeSugar_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DeclarativeSugar_Tests-umbrella.h"; sourceTree = "<group>"; };
 		62AA28B722A47343D43845C4EDB3BA16 /* DeclarativeSugar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DeclarativeSugar.xcconfig; sourceTree = "<group>"; };
 		634A12DCF14589E66B8AE81C0ADA819F /* Pods_DeclarativeSugar_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeclarativeSugar_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -357,7 +355,6 @@
 				5687AEB422F7BE6600C80B1E /* DeclarativeView.swift */,
 				5687AEB822F7BEBB00C80B1E /* DeclarativeListView.swift */,
 				A3FF1849BEA342E50BCD2BBB156729EB /* DeclarativeCore.swift */,
-				5687AEBA22F7CA7A00C80B1E /* UIStackView+DZ.swift */,
 				783D6588019199753846D4FC4560CBBE /* Support Files */,
 				A175DD3038FF0D94C27653DFB09A5DF8 /* Pod */,
 			);
@@ -725,7 +722,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F041B4F952556DEF89B1CF63E6E7F3AF /* DeclarativeSugar-dummy.m in Sources */,
-				5687AEBB22F7CA7A00C80B1E /* UIStackView+DZ.swift in Sources */,
 				5687AEB722F7BE8000C80B1E /* DeclarativeViewController.swift in Sources */,
 				5687AEB922F7BEBB00C80B1E /* DeclarativeListView.swift in Sources */,
 				5687AEB522F7BE6600C80B1E /* DeclarativeView.swift in Sources */,
