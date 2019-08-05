@@ -21,9 +21,9 @@ Dependency: UIKit, *nothing else*.
 
 But I would suggest using [Then](https://github.com/devxoul/Then) for writing cleaner initializer.
 
-## Usage
+## Setup
 
-### 1. Inherite `DeclarativeViewController` or `DeclarativeView`
+### Inherite `DeclarativeViewController` or `DeclarativeView`
 
 ``` swift
 class ViewController: DeclarativeViewController {
@@ -31,7 +31,7 @@ class ViewController: DeclarativeViewController {
 }
 ```
 
-### 2. Provide your own view-hierachy
+### Provide your own view-hierachy
 
 ``` swift
 override func build() -> DZWidget {
@@ -39,7 +39,117 @@ override func build() -> DZWidget {
 }
 ```
 
-### 3. Update state (full rebuild without animation)
+## Widget
+
+### Row
+
+Layout views horizontally
+
+``` swift
+DZRow(
+    mainAxisAlignment: ... // UIStackView.Distribution
+    crossAxisAlignment: ... // UIStackView.Alignment
+    children: [
+       ...
+    ])
+```
+
+### Column
+
+Layout views vertically
+
+``` swift
+DZColumn(
+    mainAxisAlignment: ... // UIStackView.Distribution
+    crossAxisAlignment: ... // UIStackView.Alignment
+    children: [
+       ...
+    ])
+```
+
+### Padding
+
+Set padding for child Widget
+
+#### only
+
+``` swift
+ DZPadding(
+    edgeInsets: DZEdgeInsets.only(left: 10, top: 8, right: 10, bottom: 8),
+    child: UILabel().then { $0.text = "hello world" }
+ ),
+```
+
+#### symmetric
+
+``` swift
+ DZPadding(
+    edgeInsets: DZEdgeInsets.symmetric(vertical: 10, horizontal: 20),
+    child: UILabel().then { $0.text = "hello world" }
+ ),
+```
+
+#### all
+
+``` swift
+ DZPadding(
+    edgeInsets: DZEdgeInsets.all(16),
+    child: UILabel().then { $0.text = "hello world" }
+ ),
+```
+
+## Spacer
+
+For `Row`: It is a `SizedBox` with width value.
+
+```
+DZRow(
+    children: [
+        ...
+        DZSpacer(20), 
+        ...
+    ]
+)
+```
+
+For `Column`: It is a `SizedBox` with height value.
+
+```
+DZColumn(
+    children: [
+        ...
+        DZSpacer(20), 
+        ...
+    ]
+)
+```
+
+## ListView
+
+Generally, You don't need delegate/datasource pattern
+
+```
+ DZListView(
+    tableView: UITableView().then { $0.separatorStyle = .singleLine },
+    sections: [
+        DZListSection(
+            rows: [
+                DZListCell(
+                    widget: ...,
+                DZListCell(
+                    widget: ...,
+            ]).then { $0.headerTitle = "section 1"; $0.headerHeight = 20 }, // setup section header/footer
+        DZListSection(
+            rows: [
+                DZListCell(widget: ...).then { $0.configureCell = { $0.accessoryType = .disclosureIndicator } } // setup cell
+            ])
+    ]).then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() } }
+```
+
+
+## Rebuild
+
+### Update state (full rebuild)
 
 ``` swift
 self.rebuild {
@@ -47,7 +157,7 @@ self.rebuild {
 }
 ```
 
-### 4. Update state (incremental update with animation)
+### Update state (incremental rebuild)
 
 ``` swift
 UIView.animate(withDuration: 0.5) {
