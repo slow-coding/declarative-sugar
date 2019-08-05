@@ -100,7 +100,7 @@ Set padding for child Widget
 
 ## Spacer
 
-For `Row`: It is a `SizedBox` with width value.
+For `Row`: it is a `SizedBox` with width value.
 
 ```
 DZRow(
@@ -112,7 +112,7 @@ DZRow(
 )
 ```
 
-For `Column`: It is a `SizedBox` with height value.
+For `Column`: it is a `SizedBox` with height value.
 
 ```
 DZColumn(
@@ -126,7 +126,7 @@ DZColumn(
 
 ## ListView
 
-Generally, You don't need delegate/datasource pattern
+Generally, you don't need delegate/datasource pattern
 
 ```
  DZListView(
