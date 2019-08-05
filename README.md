@@ -2,6 +2,8 @@
 
 > a Flutter-like declarative syntax sugar based on Swift and UIStackView  
 
+[中文介绍](https://juejin.im/post/5d47ec49e51d45620b21c35c)
+
 ## Screenshot
 
 ![](2019-08-05-13-56-56.png)
