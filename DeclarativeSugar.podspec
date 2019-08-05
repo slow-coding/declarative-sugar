@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DeclarativeSugar'
-  s.version          = '0.1.5'
-  s.summary          = 'a Flutter-like declarative UI'
+  s.version          = '0.1.6'
+  s.summary          = 'a Flutter-like declarative syntax sugar'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-a Flutter-like declarative UI syntax sugar base on Swift and UIStackView
+a Flutter-like declarative syntax sugar based on Swift and UIStackView
                        DESC
 
   s.homepage         = 'https://github.com/slow-coding/DeclarativeSugar'
