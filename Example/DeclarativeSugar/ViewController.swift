@@ -143,12 +143,25 @@ import Then
 //    }
 //}
 
-
-
 /////////////////////////////////////////////////////
-// ListView Example
+// Dynamic ListView Example
 /////////////////////////////////////////////////////
 
+//class ViewController: DeclarativeViewController {
+//
+//    var models = ["a", "b", "c", "d", "e"]
+//
+//    override func build() -> DZWidget {
+//        return DZListView(
+//            tableView: UITableView(),
+//            rows: models.map { model in DZListCell(widget: UILabel().then { $0.text = model }) })
+//            .then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() } }
+//    }
+//}
+
+/////////////////////////////////////////////////////
+// Static ListView Example
+/////////////////////////////////////////////////////
 
 class ViewController: DeclarativeViewController {
     override func build() -> DZWidget {
@@ -203,4 +216,5 @@ class ViewController: DeclarativeViewController {
             ]).then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() } }
     }
 }
+
 

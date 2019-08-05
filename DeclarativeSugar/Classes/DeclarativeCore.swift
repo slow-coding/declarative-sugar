@@ -120,7 +120,7 @@ public class DZContext {
             return stackable.stackView
         }
    
-        return UIView()
+        return rootWidget
     }
     
     private func findCurrentStackView(item: DZWidget) -> UIStackView? {

@@ -128,6 +128,8 @@ DZColumn(
 
 Generally, you don't need delegate/datasource pattern and UITableViewCell
 
+#### Static ListView
+
 ```
  DZListView(
     tableView: UITableView().then { $0.separatorStyle = .singleLine },
@@ -146,6 +148,14 @@ Generally, you don't need delegate/datasource pattern and UITableViewCell
     ]).then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() } }
 ```
 
+#### Dynamic ListView
+
+``` swift
+return DZListView(
+    tableView: UITableView(),
+    rows: models.map { model in DZListCell(widget: UILabel().then { $0.text = model })})
+    .then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() }}
+```
 
 ## Rebuild
 

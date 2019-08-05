@@ -32,10 +32,9 @@ public class DZListCell: UIView {
     public var identifier: String = String(Int.random(in: 0 ... 9999))
     public var cellClass: AnyClass? = nil
     public var height: CGFloat? = nil
-    public var estimatedHeight: CGFloat? = nil
     public var onTap: ((IndexPath) -> Void)? = nil
     public var willDisplay: ((IndexPath) -> Void)? = nil
-    public var shouldHighlightRow: ((IndexPath) -> Void)? = nil
+    public var shouldHighlightRow: ((IndexPath) -> Bool)? = nil
     private var currentCell: UITableViewCell? = nil
     
     public init(widget: DZWidget) {
@@ -57,9 +56,7 @@ public class DZListView: UIView {
     public init(tableView: UITableView, sections: [DZListSection]) {
         self.sections = sections
         self.tableView = tableView
-        
         super.init(frame: .zero)
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
@@ -67,6 +64,10 @@ public class DZListView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: .directionMask, metrics: nil, views: ["tableView":tableView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: .directionMask, metrics: nil, views: ["tableView":tableView]))
+    }
+
+    public convenience init(tableView: UITableView, rows: [DZListCell]) {
+        self.init(tableView: tableView, sections: [DZListSection(rows: rows)])
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -99,6 +100,16 @@ extension DZListView: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return sections[section].headerHeight
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let row = sections[indexPath.section].rows[indexPath.row]
+        row.willDisplay?(indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        let row = sections[indexPath.section].rows[indexPath.row]
+        return row.shouldHighlightRow?(indexPath) ?? false
     }
     
     public func numberOfSections(in tableView: UITableView) -> Int {
