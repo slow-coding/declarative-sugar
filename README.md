@@ -9,8 +9,7 @@ a Flutter-like declarative syntax sugar based on Swift and UIStackView
 - [x] Declarative UI
 - [x] Hide `UIStackView` complexity, use Flutter-ish API instead
 - [x] Support composable view-hierachy as same as `UIStackView`
-- [x] Support full/incremental rebuild  
-- [x] Support animation with incremental Rebuild
+- [x] Support `build()` entry point and `rebuild()`   
 - [x] Support `Row/Column`, , `Spacer` (`sizedBox` in Flutter)
 - [x] Supoort `ListView` (`UITableView` in UIKit) 2019-08-03
 - [x] Support `Padding` 2019-08-05
@@ -28,57 +27,15 @@ But I would suggest using [Then](https://github.com/devxoul/Then) for writing 
 
 ``` swift
 class ViewController: DeclarativeViewController {
-...
+    ...
+}
 ```
 
 ### 2. Provide your own view-hierachy
 
 ``` swift
-override func build() -> DZStack {
-    return DZColumn(
-            crossAxisAlignment: .leading,
-            children: [
-                DZRow(
-                    crossAxisAlignment: .bottom,
-                    children: [
-                        UILabel().then { $0.text = "hello world"; $0.isHidden = self.hide },
-                        UIView().then {
-                            $0.backgroundColor = .red
-                            $0.snp.makeConstraints { make in
-                                make.size.equalTo(CGSize(width: 50, height: 100))
-                            }
-                        },
-                        DZSpacer(40),
-                        UIView().then {
-                            $0.backgroundColor = .blue
-                            $0.snp.makeConstraints { make in
-                                make.size.equalTo(CGSize(width: 50, height: 50))
-                            }
-                        },
-                    ]),
-                DZSpacer(self.hide ? 10 : 50),
-                UIView().then {
-                    $0.backgroundColor = .orange
-                    $0.snp.makeConstraints { make in
-                        make.size.equalTo(CGSize(width: 50, height: 50))
-                    }
-                },
-                DZSpacer(10),
-                UILabel().then {
-                    $0.numberOfLines = 0
-                    $0.text =
-                    """
-                    Swift is a general-purpose, multi-paradigm, compiled programming language created for iOS, OS X, watchOS, tvOS and Linux development by Apple Inc. Swift is designed to work with Apple's Cocoa and Cocoa Touch frameworks and the large body of existing Objective-C code written for Apple products
-                    """
-                },
-            ])
-            .then {
-                view.addSubview($0)
-                $0.snp.makeConstraints {
-                    $0.top.equalToSuperview().offset(300)
-                    $0.left.right.equalToSuperview()
-                }
-        }
+override func build() -> DZWidget {
+    return ...
 }
 ```
 
@@ -92,8 +49,6 @@ self.rebuild {
 
 ### 4. Update state (incremental update with animation)
 
-> note: first of all, abstract target controls to local variables
-
 ``` swift
 UIView.animate(withDuration: 0.5) {
     // incremental reload
@@ -105,12 +60,11 @@ UIView.animate(withDuration: 0.5) {
 
 ## Code Structure
 
+![](2019-08-05-14-27-50.png)
 
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 

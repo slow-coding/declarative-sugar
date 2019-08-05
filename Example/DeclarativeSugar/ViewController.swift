@@ -26,7 +26,7 @@ import Then
 //                DZRow(
 //                    crossAxisAlignment: .bottom,
 //                    children: [
-//                        UILabel().then { $0.text = "hello world"; $0.isHidden = self.hide },
+//                        UILabel().then { $0.text = "Press Background!"; $0.isHidden = self.hide },
 //                        UIView().then {
 //                            $0.backgroundColor = .red
 //                            $0.snp.makeConstraints { make in
@@ -81,7 +81,7 @@ import Then
 
 //class ViewController: DeclarativeViewController {
 //
-//    var label = UILabel().then { $0.text = "hello world" }
+//    var label = UILabel().then { $0.text = "Press Background!" }
 //    var spacer = DZSpacer(10);
 //    var hide = false
 //
@@ -132,10 +132,6 @@ import Then
 //        }
 //    }
 //
-//
-//
-//
-//
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //
 //        // incremental reload
@@ -145,11 +141,9 @@ import Then
 //            self.context.setHidden(self.hide, for: self.label)
 //        }
 //    }
-//
-//
 //}
-//
-//
+
+
 
 /////////////////////////////////////////////////////
 // ListView Example
