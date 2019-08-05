@@ -39,7 +39,7 @@ override func build() -> DZWidget {
 }
 ```
 
-## Widget
+## Layout
 
 ### Row
 
@@ -98,7 +98,7 @@ Set padding for child Widget
  ),
 ```
 
-## Spacer
+### Spacer
 
 For `Row`: it is a `SizedBox` with width value.
 
@@ -124,7 +124,7 @@ DZColumn(
 )
 ```
 
-## ListView
+### ListView
 
 Generally, you don't need delegate/datasource pattern and UITableViewCell
 
