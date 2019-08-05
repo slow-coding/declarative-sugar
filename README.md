@@ -9,8 +9,8 @@ a Flutter-like declarative syntax sugar based on Swift and UIStackView
 - [x] Declarative UI
 - [x] Hide `UIStackView` complexity, use Flutter-ish API instead
 - [x] Support composable view-hierachy as same as `UIStackView`
-- [x] Support `build()` entry point and `rebuild()`   
-- [x] Support `Row/Column`, , `Spacer` (`sizedBox` in Flutter)
+- [x] Support entry point `build()` and update method `rebuild()`   
+- [x] Support `Row/Column`, `Spacer` (`sizedBox` in Flutter)
 - [x] Supoort `ListView` (`UITableView` in UIKit) 2019-08-03
 - [x] Support `Padding` 2019-08-05
 
