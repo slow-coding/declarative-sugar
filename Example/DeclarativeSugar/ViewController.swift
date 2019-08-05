@@ -19,7 +19,7 @@ import Then
 //
 //    var hide = false
 //
-//    override func build() -> DZStack {
+//    override func build() -> DZWidget {
 //        return DZColumn(
 //            crossAxisAlignment: .leading,
 //            children: [
@@ -85,7 +85,7 @@ import Then
 //    var spacer = DZSpacer(10);
 //    var hide = false
 //
-//    override func build() -> DZStack {
+//    override func build() -> DZWidget {
 //        return DZColumn(
 //            crossAxisAlignment: .leading,
 //            children: [
@@ -151,61 +151,62 @@ import Then
 //
 //
 
+/////////////////////////////////////////////////////
+// ListView Example
+/////////////////////////////////////////////////////
 
 
 class ViewController: DeclarativeViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        _ = DZListView(
-            tableView: UITableView().then { $0.separatorStyle = .none },
+    override func build() -> DZWidget {
+        return DZListView(
+            tableView: UITableView().then { $0.separatorStyle = .singleLine },
             sections: [
                 DZListSection(
                     rows: [
-                        DZListCell(stack: DZColumn(children: [
-                            UILabel().then { $0.text = "hello world" },
-                            DZSpacer(20),
-                            ])),
-                        DZListCell(stack: DZColumn(children: [
-                            UILabel().then {
-                                $0.numberOfLines = 0
-                                $0.text =
-                                """
-                                群机器人是钉钉群的高级扩展功能。群机器人可以将第三方服务的信息聚合到群聊中，实现自动化的信息同步。
-                                目前，大部分机器人在添加后，还需要进行Webhook配置，才可正常使用(配置说明详见操作流程中的帮助链接)。
-                                """
-                            },
-                            DZSpacer(20),
-                            UISwitch(),
-                            DZSpacer(20),
-                            ])),
+                        DZListCell(
+                            widget: DZColumn(
+                                children: [
+                                    DZPadding(
+                                        edgeInsets: DZEdgeInsets.only(left: 10, top: 8, right: 10, bottom: 8),
+                                        child: UILabel().then { $0.text = "hello world" }
+                                    ),
+                                ])),
+                        DZListCell(
+                            widget: DZColumn(
+                                children: [
+                                    DZPadding(
+                                        edgeInsets: DZEdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                        child: UILabel().then {
+                                            $0.numberOfLines = 0
+                                            $0.text =
+                                            """
+                                            Swift is a general-purpose, multi-paradigm, compiled programming language created for iOS, OS X, watchOS, tvOS and Linux development by Apple Inc. Swift is designed to work with Apple's Cocoa and Cocoa Touch frameworks and the large body of existing Objective-C code written for Apple products
+                                            """
+                                    }),
+                                    UISwitch(),
+                                    DZSpacer(20),
+                                ])),
                     ]).then { $0.headerTitle = "section 1"; $0.headerHeight = 20 },
                 DZListSection(
                     rows: [
-                        DZListCell(stack:
-                            DZRow(children: [
-                                DZSpacer(20),
-                                UIImageView(image: UIImage(named: "1")).then( {$0.snp.makeConstraints {
-                                    $0.size.equalTo(CGSize(width: 50, height: 50))
-                                    }}),
-                                DZSpacer(20),
-                                DZColumn(children: [
-                                    UILabel().then { $0.text = "name"},
-                                    DZSpacer(5),
-                                    UILabel().then { $0.text = "1868888888"; $0.textColor = .gray },
+                        DZListCell(
+                            widget: DZPadding(
+                                edgeInsets: DZEdgeInsets.all(16),
+                                child: DZRow(
+                                    children: [
+                                        UIImageView(image: UIImage(named: "1"))
+                                            .then{ $0.snp.makeConstraints { $0.size.equalTo(CGSize(width: 50, height: 50)) }},
+                                        DZSpacer(20),
+                                        DZColumn(
+                                            children: [
+                                                UILabel().then { $0.text = "Darren"},
+                                                DZSpacer(5),
+                                                UILabel().then { $0.text = "Dart is way better than Swift"; $0.textColor = .gray },
+                                            ])
                                     ])
-                                ])).then { $0.configureCell = { cell in cell.accessoryType = .disclosureIndicator }},
-                    ]).then { $0.headerTitle = "section 2"; $0.headerHeight = 20 }
-            ])
-            .then {
-                view.addSubview($0)
-                $0.snp.makeConstraints {
-                    $0.edges.equalToSuperview()
-                    
-                }
-        }
+                        )).then { $0.configureCell = { $0.accessoryType = .disclosureIndicator } }
+                    ]).then { $0.headerTitle = "section 2"; $0.headerHeight = 20}
+            ]).then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() } }
     }
-    
 }
 

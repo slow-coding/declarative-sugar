@@ -1,22 +1,26 @@
 # DeclarativeSugar
 
-a Flutter-like declarative UI syntax sugar  base on Swift and UIStackView
+a Flutter-like declarative syntax sugar based on Swift and UIStackView
 
-## Feature
+![](2019-08-05-13-56-56.png)
 
-![](2019-08-01-15-06-49.png)
+## Feature List
 
 - [x] Declarative UI
-- [x] Hide UIStackView complexity, use Flutter-ish API instead
-- [x] Support composable view-hierachy as same as UIStackView
-- [x] Support "Full Rebuild" and "Incremental Update"
-- [x] Support Animation except "Full Rebuild"
+- [x] Hide `UIStackView` complexity, use Flutter-ish API instead
+- [x] Support composable view-hierachy as same as `UIStackView`
+- [x] Support full/incremental rebuild  
+- [x] Support animation with incremental Rebuild
+- [x] Support `Row/Column`, , `Spacer` (`sizedBox` in Flutter)
+- [x] Supoort `ListView` (`UITableView` in UIKit) 2019-08-03
+- [x] Support `Padding` 2019-08-05
 
 ## Depolyment & Dependency
 
-iOS 9, UIKit
+Depolyment: iOS 9, Swift 5
+Dependency: UIKit, *nothing else*.
 
-But I would like to recommend [Then](https://github.com/devxoul/Then) to write more concise UI setup code
+But I would suggest using [Then](https://github.com/devxoul/Then) for writing cleaner initializer.
 
 ## Usage
 
@@ -101,7 +105,6 @@ UIView.animate(withDuration: 0.5) {
 
 ## Code Structure
 
-![](2019-08-01-15-41-06.png)
 
 ## Example
 

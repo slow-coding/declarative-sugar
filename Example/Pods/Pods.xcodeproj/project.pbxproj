@@ -18,9 +18,13 @@
 		35CDFA197D8219EB8DEFC227259A5C03 /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C3E2063C550D5E28220B17D6242D50 /* ConstraintMakerRelatable.swift */; };
 		4268E348E6D5E9037A640ADC8E065009 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B5AA080C316FACF8A8D06F6A5ADF8C /* ConstraintMakerEditable.swift */; };
 		47B94820D6641289F98CEDA19C24196A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		4E81E4288B4EC1B2469C93153F82734A /* DeclarativeUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FF1849BEA342E50BCD2BBB156729EB /* DeclarativeUI.swift */; };
+		4E81E4288B4EC1B2469C93153F82734A /* DeclarativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FF1849BEA342E50BCD2BBB156729EB /* DeclarativeCore.swift */; };
 		54D1686EFA926E23C4BED5EEE7A19C08 /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4705E0CB7CBD33DDCC9147D3A92E40 /* ConstraintInsets.swift */; };
 		5544BDD6A14E06C7FB3A878BC3E96299 /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC3F82E926E2777D3AFE0CBD1E407E /* ConstraintView.swift */; };
+		5687AEB522F7BE6600C80B1E /* DeclarativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687AEB422F7BE6600C80B1E /* DeclarativeView.swift */; };
+		5687AEB722F7BE8000C80B1E /* DeclarativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687AEB622F7BE8000C80B1E /* DeclarativeViewController.swift */; };
+		5687AEB922F7BEBB00C80B1E /* DeclarativeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687AEB822F7BEBB00C80B1E /* DeclarativeListView.swift */; };
+		5687AEBB22F7CA7A00C80B1E /* UIStackView+DZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687AEBA22F7CA7A00C80B1E /* UIStackView+DZ.swift */; };
 		5C376607904258A10F4DDD6D42EFC491 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D885FEA2698E99E4613EB8B0830A10D /* ConstraintMaker.swift */; };
 		5DBFB9A0499F04CBE806486211A4ABD0 /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7BDAC1B1115E65DECBD8D63A4BBE9D /* SnapKit-dummy.m */; };
 		6551B3BE1562E928D00690DEEF63BD87 /* Pods-DeclarativeSugar_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CA93F69998BCD7D4C49C1BFE8BF112C3 /* Pods-DeclarativeSugar_Example-dummy.m */; };
@@ -113,6 +117,10 @@
 		47C7E7589373BCE44F4272E1E9888D17 /* DeclarativeSugar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DeclarativeSugar.modulemap; sourceTree = "<group>"; };
 		4AA3A0242D311630FDE854076A877491 /* Pods-DeclarativeSugar_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DeclarativeSugar_Example-Info.plist"; sourceTree = "<group>"; };
 		4C9FF8FF448900FDA3114B5EBAA52360 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Source/ConstraintConfig.swift; sourceTree = "<group>"; };
+		5687AEB422F7BE6600C80B1E /* DeclarativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclarativeView.swift; sourceTree = "<group>"; };
+		5687AEB622F7BE8000C80B1E /* DeclarativeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclarativeViewController.swift; sourceTree = "<group>"; };
+		5687AEB822F7BEBB00C80B1E /* DeclarativeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclarativeListView.swift; sourceTree = "<group>"; };
+		5687AEBA22F7CA7A00C80B1E /* UIStackView+DZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+DZ.swift"; sourceTree = "<group>"; };
 		5CCB8A6A72C185ABE636A6BD35B044F3 /* Pods-DeclarativeSugar_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DeclarativeSugar_Tests-umbrella.h"; sourceTree = "<group>"; };
 		62AA28B722A47343D43845C4EDB3BA16 /* DeclarativeSugar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DeclarativeSugar.xcconfig; sourceTree = "<group>"; };
 		634A12DCF14589E66B8AE81C0ADA819F /* Pods_DeclarativeSugar_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeclarativeSugar_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +145,7 @@
 		9D62474B36CB1BF4D067B8E8BC25DAEA /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UILayoutSupport+Extensions.swift"; path = "Source/UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F9FC5B11306E63BD5C7BCA89F6751BF /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Source/Constraint.swift; sourceTree = "<group>"; };
-		A3FF1849BEA342E50BCD2BBB156729EB /* DeclarativeUI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeclarativeUI.swift; path = DeclarativeSugar/Classes/DeclarativeUI.swift; sourceTree = "<group>"; };
+		A3FF1849BEA342E50BCD2BBB156729EB /* DeclarativeCore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeclarativeCore.swift; path = DeclarativeSugar/Classes/DeclarativeCore.swift; sourceTree = "<group>"; };
 		A90B01AD4451E27B083E96DAB605FC45 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintViewDSL.swift; path = Source/ConstraintViewDSL.swift; sourceTree = "<group>"; };
 		AA730023EC963F435C48F05C2D5CAA02 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Source/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
 		AC4705E0CB7CBD33DDCC9147D3A92E40 /* ConstraintInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsets.swift; path = Source/ConstraintInsets.swift; sourceTree = "<group>"; };
@@ -345,9 +353,13 @@
 		CD5A1982306EFC9CFC9A1EAA8ACF29BC /* DeclarativeSugar */ = {
 			isa = PBXGroup;
 			children = (
-				A3FF1849BEA342E50BCD2BBB156729EB /* DeclarativeUI.swift */,
-				A175DD3038FF0D94C27653DFB09A5DF8 /* Pod */,
+				5687AEB622F7BE8000C80B1E /* DeclarativeViewController.swift */,
+				5687AEB422F7BE6600C80B1E /* DeclarativeView.swift */,
+				5687AEB822F7BEBB00C80B1E /* DeclarativeListView.swift */,
+				A3FF1849BEA342E50BCD2BBB156729EB /* DeclarativeCore.swift */,
+				5687AEBA22F7CA7A00C80B1E /* UIStackView+DZ.swift */,
 				783D6588019199753846D4FC4560CBBE /* Support Files */,
+				A175DD3038FF0D94C27653DFB09A5DF8 /* Pod */,
 			);
 			name = DeclarativeSugar;
 			path = ../..;
@@ -713,7 +725,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F041B4F952556DEF89B1CF63E6E7F3AF /* DeclarativeSugar-dummy.m in Sources */,
-				4E81E4288B4EC1B2469C93153F82734A /* DeclarativeUI.swift in Sources */,
+				5687AEBB22F7CA7A00C80B1E /* UIStackView+DZ.swift in Sources */,
+				5687AEB722F7BE8000C80B1E /* DeclarativeViewController.swift in Sources */,
+				5687AEB922F7BEBB00C80B1E /* DeclarativeListView.swift in Sources */,
+				5687AEB522F7BE6600C80B1E /* DeclarativeView.swift in Sources */,
+				4E81E4288B4EC1B2469C93153F82734A /* DeclarativeCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
