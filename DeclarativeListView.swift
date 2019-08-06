@@ -31,7 +31,6 @@ public class DZListCell: UIView {
     public var configureCell: ((UITableViewCell) -> Void)? = nil
     public var identifier: String = String(Int.random(in: 0 ... 9999))
     public var cellClass: AnyClass? = nil
-    public var height: CGFloat? = nil
     public var onTap: ((IndexPath) -> Void)? = nil
     public var willDisplay: ((IndexPath) -> Void)? = nil
     public var shouldHighlightRow: ((IndexPath) -> Bool)? = nil
