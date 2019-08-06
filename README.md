@@ -134,7 +134,7 @@ Generally, you don't need delegate/datasource pattern and UITableViewCell
 
 ```
  DZListView(
-    tableView: UITableView().then { $0.separatorStyle = .singleLine },
+    tableView: UITableView(),
     sections: [
         DZListSection(
             rows: [
@@ -142,12 +142,12 @@ Generally, you don't need delegate/datasource pattern and UITableViewCell
                     widget: ...,
                 DZListCell(
                     widget: ...,
-            ]).then { $0.headerTitle = "section 1"; $0.headerHeight = 20 }, // setup section header/footer
+            ]), // setup section header/footer
         DZListSection(
             rows: [
-                DZListCell(widget: ...).then { $0.configureCell = { $0.accessoryType = .disclosureIndicator } } // setup cell
+                DZListCell(widget: ...) } // setup cell
             ])
-    ]).then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() } }
+    ])
 ```
 
 #### Dynamic ListView
