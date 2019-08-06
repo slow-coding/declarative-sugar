@@ -38,19 +38,13 @@ extension DZStackableWidget {
     }
 }
 
-
-
-public struct DZEdgeInsets {
+extension UIEdgeInsets {
     
-    public var left: CGFloat = 0
-    public var top: CGFloat = 0
-    public var right: CGFloat = 0
-    public var bottom: CGFloat = 0
     public static func only(left: CGFloat = 0,
                             top: CGFloat = 0,
                             right: CGFloat = 0,
-                            bottom: CGFloat = 0) -> DZEdgeInsets {
-        var edgeInsets = DZEdgeInsets()
+                            bottom: CGFloat = 0) -> UIEdgeInsets {
+        var edgeInsets = UIEdgeInsets()
         edgeInsets.left = left
         edgeInsets.top = top
         edgeInsets.right = right
@@ -58,19 +52,50 @@ public struct DZEdgeInsets {
         return edgeInsets
     }
     
-    public static func fromLTRB(left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat) -> DZEdgeInsets {
+    public static func fromLTRB(left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat) -> UIEdgeInsets {
         return only(left: left, top: top, right: right, bottom: bottom)
     }
     
-    public static func all(_ value: CGFloat) -> DZEdgeInsets {
+    public static func all(_ value: CGFloat) -> UIEdgeInsets {
         return only(left: value, top: value, right: value, bottom: value)
     }
     
-    public static func symmetric(vertical: CGFloat = 0, horizontal: CGFloat = 0) -> DZEdgeInsets {
+    public static func symmetric(vertical: CGFloat = 0, horizontal: CGFloat = 0) -> UIEdgeInsets {
         return only(left: horizontal, top: vertical, right: horizontal, bottom: vertical)
     }
-    
 }
+//
+//public struct DZEdgeInsets {
+//
+//    public var left: CGFloat = 0
+//    public var top: CGFloat = 0
+//    public var right: CGFloat = 0
+//    public var bottom: CGFloat = 0
+//    public static func only(left: CGFloat = 0,
+//                            top: CGFloat = 0,
+//                            right: CGFloat = 0,
+//                            bottom: CGFloat = 0) -> DZEdgeInsets {
+//        var edgeInsets = DZEdgeInsets()
+//        edgeInsets.left = left
+//        edgeInsets.top = top
+//        edgeInsets.right = right
+//        edgeInsets.bottom = bottom
+//        return edgeInsets
+//    }
+//
+//    public static func fromLTRB(left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat) -> DZEdgeInsets {
+//        return only(left: left, top: top, right: right, bottom: bottom)
+//    }
+//
+//    public static func all(_ value: CGFloat) -> DZEdgeInsets {
+//        return only(left: value, top: value, right: value, bottom: value)
+//    }
+//
+//    public static func symmetric(vertical: CGFloat = 0, horizontal: CGFloat = 0) -> DZEdgeInsets {
+//        return only(left: horizontal, top: vertical, right: horizontal, bottom: vertical)
+//    }
+//
+//}
 
 
 public class DZSpacer: UIView {
@@ -193,11 +218,11 @@ public class DZColumn: UIView, DZStackableWidget {
 
 public class DZPadding: UIView, DZSingleChildWidget {
     
-    public var edgeInsets: DZEdgeInsets = DZEdgeInsets()
+    public var edgeInsets = UIEdgeInsets()
     
     public var child: DZWidget
     
-    required public init(edgeInsets: DZEdgeInsets,
+    required public init(edgeInsets: UIEdgeInsets,
                          child: DZWidget)  {
         self.child = child
         self.edgeInsets = edgeInsets

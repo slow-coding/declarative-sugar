@@ -174,7 +174,7 @@ class ViewController: DeclarativeViewController {
                             widget: DZColumn(
                                 children: [
                                     DZPadding(
-                                        edgeInsets: DZEdgeInsets.only(left: 10, top: 8, right: 10, bottom: 8),
+                                        edgeInsets: UIEdgeInsets.only(left: 10, top: 8, right: 10, bottom: 8),
                                         child: UILabel().then { $0.text = "hello world" }
                                     ),
                                 ])),
@@ -182,7 +182,7 @@ class ViewController: DeclarativeViewController {
                             widget: DZColumn(
                                 children: [
                                     DZPadding(
-                                        edgeInsets: DZEdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                        edgeInsets: UIEdgeInsets.symmetric(vertical: 10, horizontal: 20),
                                         child: UILabel().then {
                                             $0.numberOfLines = 0
                                             $0.text =
@@ -198,7 +198,7 @@ class ViewController: DeclarativeViewController {
                     rows: [
                         DZListCell(
                             widget: DZPadding(
-                                edgeInsets: DZEdgeInsets.all(16),
+                                edgeInsets: UIEdgeInsets.all(16),
                                 child: DZRow(
                                     children: [
                                         UIImageView(image: UIImage(named: "1"))
