@@ -153,6 +153,8 @@ Generally, you don't need delegate/datasource pattern and UITableViewCell
 
 #### Dynamic ListView
 
+Using `rows:` for single section list view
+
 ``` swift
 
 var models = ["a", "b", "c", "d", "e"]
