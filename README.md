@@ -143,10 +143,10 @@ Generally, you don't need delegate/datasource pattern and UITableViewCell
                     widget: ...,
                 DZListCell(
                     widget: ...,
-            ]), // setup section header/footer
+            ]),
         DZListSection(
             rows: [
-                DZListCell(widget: ...) } // setup cell
+                DZListCell(widget: ...) }
             ])
     ])
 ```
