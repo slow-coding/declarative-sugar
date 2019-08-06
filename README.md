@@ -129,7 +129,7 @@ DZColumn(
 
 ### ListView
 
-Generally, you don't need delegate/datasource pattern and UITableViewCell
+Generally, you don't need to deal with delegate/datasource pattern and UITableViewCell
 
 #### Static ListView
 
