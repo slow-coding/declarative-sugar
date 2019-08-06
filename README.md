@@ -17,7 +17,7 @@
 - [x] `Row/Column`, `Spacer` (`sizedBox` in Flutter)
 - [x] `ListView` (`UITableView` in UIKit) #2019-08-03
 - [x] `Padding` #2019-08-05
-- [ ] `UICollectionView` #in coming
+- [ ] `UICollectionView` #incoming
 
 **Depolyment**: iOS 9, Swift 5  
 **Dependency**: UIKit (*nothing else*)  
