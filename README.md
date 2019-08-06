@@ -12,11 +12,12 @@
 
 - [x] Declarative UI
 - [x] Hide `UIStackView` complexity, use Flutter-ish API instead
-- [x] Support composable view-hierachy as same as `UIStackView`
-- [x] Support entry point `build()` and update method `rebuild()`   
-- [x] Support `Row/Column`, `Spacer` (`sizedBox` in Flutter)
-- [x] Supoort `ListView` (`UITableView` in UIKit) 2019-08-03
-- [x] Support `Padding` 2019-08-05
+- [x] composable view-hierachy as same as `UIStackView`
+- [x] entry point `build()` and update method `rebuild()`   
+- [x] `Row/Column`, `Spacer` (`sizedBox` in Flutter)
+- [x] `ListView` (`UITableView` in UIKit) #2019-08-03
+- [x] `Padding` #2019-08-05
+- [ ] `UICollectionView` #incomming
 
 **Depolyment**: iOS 9, Swift 5  
 **Dependency**: UIKit (*nothing else*)  
