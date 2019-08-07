@@ -1,5 +1,5 @@
 PODS:
-  - DeclarativeSugar (0.1.0)
+  - DeclarativeSugar (0.1.11)
   - SnapKit (4.2.0)
   - Then (2.5.0)
 
@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DeclarativeSugar: 6bad609fbf37432ec1edd9d2e2594ef2b3028d6e
+  DeclarativeSugar: 8b80a316c7e0bd1e0602c7ba11acf35c017f35fd
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   Then: 0157115e883545c77967b452fe74a1d25fb796e1
 
