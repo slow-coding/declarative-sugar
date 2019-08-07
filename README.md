@@ -163,14 +163,14 @@ Static ListView
     tableView: UITableView(),
     sections: [
         DZListSection(
-            rows: [
+            cells: [
                 DZListCell(
                     widget: ...,
                 DZListCell(
                     widget: ...,
             ]),
         DZListSection(
-            rows: [
+            cells: [
                 DZListCell(widget: ...) }
             ])
     ])
