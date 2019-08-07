@@ -116,7 +116,7 @@ DZCenter(
 
 ### 3.5 SizedBox
 
-Add height and width constraints to the child.
+Adding height and width constraints to the child.
 
 ``` swift
 DZSizedBox(
