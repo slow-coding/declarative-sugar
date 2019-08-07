@@ -166,16 +166,16 @@ Static ListView
  DZListView(
     tableView: UITableView(),
     sections: [
-        DZListSection(
+        DZSection(
             cells: [
-                DZListCell(
+                DZCell(
                     widget: ...,
-                DZListCell(
+                DZCell(
                     widget: ...,
             ]),
-        DZListSection(
+        DZSection(
             cells: [
-                DZListCell(widget: ...) }
+                DZCell(widget: ...) }
             ])
     ])
 ```
@@ -188,7 +188,7 @@ Using `rows:` for single section list view
 return DZListView(
     tableView: UITableView(),
     cells: ["a", "b", "c", "d", "e"].map { model in 
-        DZListCell(widget: UILabel().then { $0.text = model })
+        DZCell(widget: UILabel().then { $0.text = model })
     }
 )
 ```
