@@ -154,7 +154,7 @@ import Then
 //    override func build() -> DZWidget {
 //        return DZListView(
 //            tableView: UITableView(),
-//            rows: models.map { model in DZListCell(widget: UILabel().then { $0.text = model }) })
+//            cells: models.map { model in DZCell(widget: UILabel().then { $0.text = model }) })
 //            .then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() } }
 //    }
 //}
@@ -164,21 +164,17 @@ import Then
 /////////////////////////////////////////////////////
 
 class ViewController: DeclarativeViewController {
+    
     override func build() -> DZWidget {
         return DZListView(
             tableView: UITableView().then { $0.separatorStyle = .singleLine },
             sections: [
-                DZListSection(
-                    rows: [
-                        DZListCell(
-                            widget: DZColumn(
-                                children: [
-                                    DZPadding(
-                                        edgeInsets: UIEdgeInsets.only(left: 10, top: 8, right: 10, bottom: 8),
-                                        child: UILabel().then { $0.text = "hello world" }
-                                    ),
-                                ])),
-                        DZListCell(
+                DZSection(
+                    cells: [
+                        DZCell(
+                            cellHeight: 45,
+                            widget: DZCenter(child: UILabel().then { $0.text = "hello world"; $0.font = UIFont.systemFont(ofSize: 24) })),
+                        DZCell(
                             widget: DZColumn(
                                 children: [
                                     DZPadding(
@@ -190,19 +186,23 @@ class ViewController: DeclarativeViewController {
                                             Swift is a general-purpose, multi-paradigm, compiled programming language created for iOS, OS X, watchOS, tvOS and Linux development by Apple Inc. Swift is designed to work with Apple's Cocoa and Cocoa Touch frameworks and the large body of existing Objective-C code written for Apple products
                                             """
                                     }),
-                                    UISwitch(),
+                                    DZSpacer(10),
+                                    DZPadding(
+                                        edgeInsets: UIEdgeInsets.only(left: 15),
+                                        child:UISwitch()
+                                    ),
                                     DZSpacer(20),
                                 ])),
-                    ]).then { $0.headerTitle = "section 1"; $0.headerHeight = 20 },
-                DZListSection(
-                    rows: [
-                        DZListCell(
+                    ]).then { $0.headerTitle = "section 0"; $0.headerHeight = 30 },
+                DZSection(
+                    cells: [
+                        DZCell(
                             widget: DZPadding(
                                 edgeInsets: UIEdgeInsets.all(16),
                                 child: DZRow(
+                                    mainAxisAlignment: UIStackView.Distribution.fillProportionally,
                                     children: [
-                                        UIImageView(image: UIImage(named: "1"))
-                                            .then{ $0.snp.makeConstraints { $0.size.equalTo(CGSize(width: 50, height: 50)) }},
+                                        DZSizedBox(width: 50, height: 50, child: UIImageView(image: UIImage(named: "icon"))),
                                         DZSpacer(20),
                                         DZColumn(
                                             children: [
@@ -212,9 +212,10 @@ class ViewController: DeclarativeViewController {
                                             ])
                                     ])
                         )).then { $0.configureCell = { $0.accessoryType = .disclosureIndicator } }
-                    ]).then { $0.headerTitle = "section 2"; $0.headerHeight = 20}
-            ]).then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() } }
+                    ]).then { $0.headerTitle = "section 1"; $0.headerHeight = 30 }
+            ])
     }
+    
 }
 
 

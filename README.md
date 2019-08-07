@@ -1,33 +1,33 @@
 # DeclarativeSugar
 
-> a Flutter-like declarative syntax sugar based on Swift and UIStackView  
+> A lightweight Flutter-flavor declarative syntax sugar based on Swift and UIStackView
 
 [中文介绍](https://juejin.im/post/5d47ec49e51d45620b21c35c)
 
-## Screenshot
+## 0.Screenshot
 
-![](2019-08-05-13-56-56.png)
+![](screenshot.png)
 
-## Feature List
+## 1.Feature List
 
 - [x] Declarative UI
 - [x] Hide `UIStackView` complexity, use Flutter-ish API instead
 - [x] composable view-hierachy as same as `UIStackView`
 - [x] entry point `build()` and update method `rebuild()`   
-- [x] `Row/Column`, `Spacer` (`sizedBox` in Flutter)
+- [x] `Row/Column`, `Spacer` 
 - [x] `ListView` (`UITableView` in UIKit) #2019-08-03
 - [x] `Padding` #2019-08-05
-- [ ] `ListView` supports `UIView`, `UITableViewCell` mix match #incoming
-- [ ] `UICollectionView` 
+- [x] `Center`, `SizedBox` #2019-08-07
 
 **Depolyment**: iOS 9, Swift 5  
 **Dependency**: UIKit (*nothing else*)  
 
 But I would suggest using [Then](https://github.com/devxoul/Then) for writing cleaner initializer.
+The other goal is to remove the needs of using SnapKit or other autolayout framework.
 
-## Setup
+## 2.Setup
 
-### Inherite `DeclarativeViewController` or `DeclarativeView`
+### 2.1 Inherite `DeclarativeViewController` or `DeclarativeView`
 
 ``` swift
 class ViewController: DeclarativeViewController {
@@ -35,7 +35,9 @@ class ViewController: DeclarativeViewController {
 }
 ```
 
-### Provide your own view-hierachy
+### 2.2 Provide your own view-hierachy
+
+This view will be added to `ViewController`'s root view with full screen constraints.
 
 ``` swift
 override func build() -> DZWidget {
@@ -43,11 +45,11 @@ override func build() -> DZWidget {
 }
 ```
 
-## Layout
+## 3.Layout
 
-### Row
+### 3.1 Row
 
-Layout views horizontally
+Layout views horizontally.
 
 ``` swift
 DZRow(
@@ -58,9 +60,9 @@ DZRow(
     ])
 ```
 
-### Column
+### 3.2 Column
 
-Layout views vertically
+Layout views vertically.
 
 ``` swift
 DZColumn(
@@ -71,11 +73,11 @@ DZColumn(
     ])
 ```
 
-### Padding
+### 3.3 Padding
 
-Set padding for child widget
+Set padding for child widget.
 
-#### only
+only
 
 ``` swift
  DZPadding(
@@ -84,7 +86,7 @@ Set padding for child widget
  ),
 ```
 
-#### symmetric
+symmetric
 
 ``` swift
  DZPadding(
@@ -93,13 +95,35 @@ Set padding for child widget
  ),
 ```
 
-#### all
+all
 
 ``` swift
  DZPadding(
     edgeInsets: UIEdgeInsets.all(16),
     child: UILabel().then { $0.text = "hello world" }
  ),
+```
+
+### 3.4 Center
+
+Equivalent to centerX and centerY in autolayout.
+
+``` swift
+DZCenter(
+    child: UILabel().then { $0.text = "hello world" }
+)
+```
+
+### 3.5 SizedBox
+
+Add height and width constraints to the child.
+
+``` swift
+DZSizedBox(
+    width: 50, 
+    height: 50, 
+    child: UIImageView(image: UIImage(named: "icon"))
+)
 ```
 
 ### Spacer
@@ -157,18 +181,17 @@ Generally, you don't need to deal with delegate/datasource pattern and UITableVi
 Using `rows:` for single section list view
 
 ``` swift
-
-var models = ["a", "b", "c", "d", "e"]
-
 return DZListView(
     tableView: UITableView(),
-    rows: models.map { model in DZListCell(widget: UILabel().then { $0.text = model })})
-    .then { view.addSubview($0); $0.snp.makeConstraints { $0.edges.equalToSuperview() }}
+    cells: ["a", "b", "c", "d", "e"].map { model in 
+        DZListCell(widget: UILabel().then { $0.text = model })
+    }
+)
 ```
 
 ## Rebuild
 
-### Update state (reset)
+### Update state (reset completely)
 
 ``` swift
 self.rebuild {
@@ -189,7 +212,7 @@ UIView.animate(withDuration: 0.5) {
 
 ## Code Structure
 
-![](2019-08-05-15-26-11.png)
+![](2019-08-07-08-47-54.png)
 
 ## Example
 
