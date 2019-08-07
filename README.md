@@ -91,7 +91,7 @@ only
 
 ``` swift
  DZPadding(
-    edgeInsets: UIEdgeInsets.only(left: 10, top: 8, right: 10, bottom: 8),
+    edgeInsets: DZEdgeInsets.only(left: 10, top: 8, right: 10, bottom: 8),
     child: UILabel().then { $0.text = "hello world" }
  ),
 ```
@@ -100,7 +100,7 @@ symmetric
 
 ``` swift
  DZPadding(
-    edgeInsets: UIEdgeInsets.symmetric(vertical: 10, horizontal: 20),
+    edgeInsets: DZEdgeInsets.symmetric(vertical: 10, horizontal: 20),
     child: UILabel().then { $0.text = "hello world" }
  ),
 ```
@@ -109,7 +109,7 @@ all
 
 ``` swift
  DZPadding(
-    edgeInsets: UIEdgeInsets.all(16),
+    edgeInsets: DZEdgeInsets.all(16),
     child: UILabel().then { $0.text = "hello world" }
  ),
 ```
