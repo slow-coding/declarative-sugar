@@ -14,6 +14,7 @@ open class DeclarativeView: UIView {
         super.draw(rect)
         context = DZContext(rootWidget: build())
         addSubview(context.rootView)
+        context.rootView.translatesAutoresizingMaskIntoConstraints = false
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
     }
