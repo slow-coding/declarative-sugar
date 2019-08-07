@@ -14,6 +14,8 @@
 
 **Using playground**
 
+`DeclarativeSugarPG.playground`.
+
 ![](2019-08-07-11-38-04.png)
 
 ## 1.Feature List
