@@ -7,17 +7,30 @@
 
 import UIKit
 
-public class DZListSection: UIView {
-    public var headerView: UIView? = nil
-    public var footerView: UIView? = nil
-    public var headerTitle: String? = nil
-    public var footerTitle: String? = nil
-    public var headerHeight: CGFloat = 0
-    public var footerHeight: CGFloat = 0
-    public var rows: [DZListCell] = []
+public class DZSection: UIView {
     
-    public init(rows: [DZListCell]) {
-        self.rows = rows
+    public var headerView: UIView?
+    public var footerView: UIView?
+    public var headerTitle: String?
+    public var footerTitle: String?
+    public var headerHeight: CGFloat?
+    public var footerHeight: CGFloat?
+    public var cells: [DZCell] = []
+    
+    public init(headerView: UIView? = nil,
+                footerView: UIView? = nil,
+                headerTitle: String? = nil,
+                footerTitle: String? = nil,
+                headerHeight: CGFloat? = 0,
+                footerHeight: CGFloat? = 0,
+                cells: [DZCell]) {
+        self.cells = cells
+        self.headerView = headerView
+        self.footerView = footerView
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.headerHeight = headerHeight
+        self.footerHeight = footerHeight
         super.init(frame: .zero)
     }
     
@@ -26,18 +39,35 @@ public class DZListSection: UIView {
     }
 }
 
-public class DZListCell: UIView {
+public class DZCell: UIView {
+    
     public var widget: DZWidget
-    public var configureCell: ((UITableViewCell) -> Void)? = nil
-    public var identifier: String = String(Int.random(in: 0 ... 9999))
-    public var cellClass: AnyClass? = nil
-    public var onTap: ((IndexPath) -> Void)? = nil
-    public var willDisplay: ((IndexPath) -> Void)? = nil
-    public var shouldHighlightRow: ((IndexPath) -> Bool)? = nil
+    public var configureCell: ((UITableViewCell) -> Void)?
+    public var identifier: String
+    public var cellClass: AnyClass?
+    public var onTap: ((IndexPath) -> Void)?
+    public var willDisplay: ((IndexPath) -> Void)?
+    public var shouldHighlightRow: ((IndexPath) -> Bool)?
+    public var cellHeight: CGFloat? = nil
+
     private var currentCell: UITableViewCell? = nil
     
-    public init(widget: DZWidget) {
+    public init(configureCell: ((UITableViewCell) -> Void)? = nil,
+                identifier: String = String(Int.random(in: 0 ... 9999)),
+                cellClass: AnyClass? = nil,
+                onTap: ((IndexPath) -> Void)? = nil,
+                willDisplay: ((IndexPath) -> Void)? = nil,
+                shouldHighlightRow: ((IndexPath) -> Bool)? = nil,
+                cellHeight: CGFloat? = nil,
+                widget: DZWidget) {
         self.widget = widget
+        self.configureCell = configureCell
+        self.identifier = identifier
+        self.cellClass = cellClass
+        self.onTap = onTap
+        self.willDisplay = willDisplay
+        self.shouldHighlightRow = shouldHighlightRow
+        self.cellHeight = cellHeight
         super.init(frame: .zero)
     }
     
@@ -49,10 +79,10 @@ public class DZListCell: UIView {
 
 public class DZListView: UIView {
     
-    let sections: [DZListSection]
+    let sections: [DZSection]
     let tableView: UITableView
     
-    public init(tableView: UITableView, sections: [DZListSection]) {
+    public init(tableView: UITableView, sections: [DZSection]) {
         self.sections = sections
         self.tableView = tableView
         super.init(frame: .zero)
@@ -65,8 +95,8 @@ public class DZListView: UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: .directionMask, metrics: nil, views: ["tableView":tableView]))
     }
 
-    public convenience init(tableView: UITableView, rows: [DZListCell]) {
-        self.init(tableView: tableView, sections: [DZListSection(rows: rows)])
+    public convenience init(tableView: UITableView, cells: [DZCell]) {
+        self.init(tableView: tableView, sections: [DZSection(cells: cells)])
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -84,7 +114,7 @@ extension DZListView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return sections[section].footerView
     }
-    
+
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section].headerTitle
     }
@@ -94,20 +124,25 @@ extension DZListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return sections[section].footerHeight
+        return sections[section].footerHeight ?? 0
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return sections[section].headerHeight
+        return sections[section].headerHeight ?? 0
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let row = sections[indexPath.section].cells[indexPath.row]
+        return row.cellHeight ?? UITableView.automaticDimension
     }
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let row = sections[indexPath.section].rows[indexPath.row]
+        let row = sections[indexPath.section].cells[indexPath.row]
         row.willDisplay?(indexPath)
     }
     
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        let row = sections[indexPath.section].rows[indexPath.row]
+        let row = sections[indexPath.section].cells[indexPath.row]
         return row.shouldHighlightRow?(indexPath) ?? false
     }
     
@@ -116,11 +151,11 @@ extension DZListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].rows.count
+        return sections[section].cells.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = sections[indexPath.section].rows[indexPath.row]
+        let row = sections[indexPath.section].cells[indexPath.row]
         let identifier = row.identifier
         var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
@@ -131,15 +166,15 @@ extension DZListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = sections[indexPath.section].rows[indexPath.row]
+        let row = sections[indexPath.section].cells[indexPath.row]
         row.onTap?(indexPath)
     }
 }
 
 public class DZListBaseCell: UITableViewCell {
     
-    let row: DZListCell
-    init(row: DZListCell, style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    let row: DZCell
+    init(row: DZCell, style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         self.row = row
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         let rootView = DZContext(rootWidget: row.widget).rootView

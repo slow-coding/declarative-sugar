@@ -107,11 +107,11 @@ public class DZContext {
         if let single = rootWidget as? DZSingleChildWidget {
             return single
         }
-            
+        
         if let stackable = rootWidget as? DZStackableWidget {
             return stackable.stackView
         }
-   
+        
         return rootWidget
     }
     
@@ -213,98 +213,172 @@ public class DZPadding: UIView, DZSingleChildWidget {
     }
 }
 
-class DZMockView: UIView { }
-
-public extension UIStackView {
-    
-    // How can I create UIStackView with variable spacing between views?
-    // https://stackoverflow.com/questions/32999159/how-can-i-create-uistackview-with-variable-spacing-between-views
-    func addCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
-        if #available(iOS 11.0, *) {
-            self.setCustomSpacing(spacing, after: arrangedSubview)
-        } else {
-            if let index = self.arrangedSubviews.firstIndex(of: arrangedSubview) {
-                let nextIndex = index+1
-                if nextIndex < self.arrangedSubviews.count, let separatorView = self.arrangedSubviews[nextIndex] as? DZMockView {
-                    separatorView.removeFromSuperview()
-                }
-                let separatorView = DZMockView(frame: .zero)
-                separatorView.translatesAutoresizingMaskIntoConstraints = false
-                switch axis {
-                case .horizontal:
-                    separatorView.widthAnchor.constraint(equalToConstant: spacing).isActive = true
-                case .vertical:
-                    separatorView.heightAnchor.constraint(equalToConstant: spacing).isActive = true
-                @unknown default:
-                    fatalError()
-                }
-                insertArrangedSubview(separatorView, at: nextIndex)
-            }
-        }
-    }
-    
-    func removeCustomSpacing(after arrangedSubview: UIView) {
-        addCustomSpacing(0, after: arrangedSubview)
-    }
-    
-    func addArrangedSubviews(_ views: [UIView?]) {
-        views
-            .compactMap({ $0 })
-            .forEach { addArrangedSubview($0) }
-    }
-    
-    func insertArrangedSubview(_ view: UIView?, after: UIView?) {
-        guard let after = after, let view = view else { return }
-        guard let targetIndex = arrangedSubviews.firstIndex(of: after) else { return }
-        if targetIndex <= arrangedSubviews.count - 1 {
-            insertArrangedSubview(view, at: targetIndex)
-        }
-    }
-    
-    func insertArrangedSubview(_ view: UIView?, before: UIView?) {
-        guard let before = before, let view = view else { return }
-        guard let targetIndex = arrangedSubviews.firstIndex(of: before) else { return }
-        if targetIndex > 0 {
-            insertArrangedSubview(view, at: targetIndex)
-        }
-    }
-    
-    func removeAllArrangedSubviews() {
-        arrangedSubviews.forEach { removeArrangedSubview($0) }
-    }
-    
-    func setHidden(_ isHidden: Bool, arrangedSubview: UIView?) {
-        guard let arrangedSubview = arrangedSubview else { return }
-        if #available(iOS 11.0, *) {
-            arrangedSubview.isHidden = isHidden
-        } else {
-            arrangedSubview.isHidden = isHidden
-            if let index = self.arrangedSubviews.firstIndex(of: arrangedSubview) {
-                let nextIndex = index+1
-                if nextIndex < self.arrangedSubviews.count, let separatorView = self.arrangedSubviews[nextIndex] as? DZMockView {
-                    separatorView.isHidden = isHidden
-                }
-                
-                if isHidden {
-                    for view in self.arrangedSubviews.reversed() {
-                        if view.isHidden == isHidden {
-                            continue
-                        }
-                        if view is DZMockView {
-                            view.isHidden = isHidden
-                        }
-                        break
-                    }
-                }
-                else {
-                    let preIndex = index-1
-                    if preIndex >= 0, let separatorView = self.arrangedSubviews[preIndex] as? DZMockView {
-                        separatorView.isHidden = isHidden
-                    }
-                }
-            }
-        }
-    }
-    
+public enum DZCenterDirection {
+    case both, vertical, horizontal
 }
 
+public class DZCenter: UIView, DZSingleChildWidget {
+    
+    public var child: DZWidget
+    
+    required public init(
+        direction: DZCenterDirection = .both,
+        child: DZWidget)  {
+        self.child = child
+        super.init(frame: .zero)
+        
+        addSubview(child)
+        child.translatesAutoresizingMaskIntoConstraints = false
+        
+        if direction != .vertical  {
+            let centerX = NSLayoutConstraint(item: self, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: child, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+            addConstraint(centerX)
+        }
+        
+        if direction != .horizontal {
+            let centerY = NSLayoutConstraint(item: self, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: child, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
+            addConstraint(centerY)
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+public class DZSizedBox: UIView, DZSingleChildWidget {
+    
+    public var child: DZWidget
+    
+    required public init(
+        width: CGFloat? = nil,
+        height: CGFloat? = nil,
+        child: DZWidget)  {
+        self.child = child
+        super.init(frame: .zero)
+        
+        addSubview(child)
+        child.translatesAutoresizingMaskIntoConstraints = false
+        
+        let widthVFL: String
+        if let width = width {
+            widthVFL = "H:|[child(\(width))]|"
+        }
+        else {
+            widthVFL = "H:|[child]|"
+        }
+        
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: widthVFL, options: .directionMask, metrics: nil, views: ["child":child]))
+        
+        let heightVFL: String
+        if let height = height {
+            heightVFL = "V:|[child(\(height))]|"
+        }
+        else {
+            heightVFL = "V:|[child]|"
+        }
+        
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: heightVFL, options: .directionMask, metrics: nil, views: ["child":child]))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//
+//class DZMockView: UIView { }
+//
+//public extension UIStackView {
+//
+//    // How can I create UIStackView with variable spacing between views?
+//    // https://stackoverflow.com/questions/32999159/how-can-i-create-uistackview-with-variable-spacing-between-views
+//    func addCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
+//        if #available(iOS 11.0, *) {
+//            self.setCustomSpacing(spacing, after: arrangedSubview)
+//        } else {
+//            if let index = self.arrangedSubviews.firstIndex(of: arrangedSubview) {
+//                let nextIndex = index+1
+//                if nextIndex < self.arrangedSubviews.count, let separatorView = self.arrangedSubviews[nextIndex] as? DZMockView {
+//                    separatorView.removeFromSuperview()
+//                }
+//                let separatorView = DZMockView(frame: .zero)
+//                separatorView.translatesAutoresizingMaskIntoConstraints = false
+//                switch axis {
+//                case .horizontal:
+//                    separatorView.widthAnchor.constraint(equalToConstant: spacing).isActive = true
+//                case .vertical:
+//                    separatorView.heightAnchor.constraint(equalToConstant: spacing).isActive = true
+//                @unknown default:
+//                    fatalError()
+//                }
+//                insertArrangedSubview(separatorView, at: nextIndex)
+//            }
+//        }
+//    }
+//
+//    func removeCustomSpacing(after arrangedSubview: UIView) {
+//        addCustomSpacing(0, after: arrangedSubview)
+//    }
+//
+//    func addArrangedSubviews(_ views: [UIView?]) {
+//        views
+//            .compactMap({ $0 })
+//            .forEach { addArrangedSubview($0) }
+//    }
+//
+//    func insertArrangedSubview(_ view: UIView?, after: UIView?) {
+//        guard let after = after, let view = view else { return }
+//        guard let targetIndex = arrangedSubviews.firstIndex(of: after) else { return }
+//        if targetIndex <= arrangedSubviews.count - 1 {
+//            insertArrangedSubview(view, at: targetIndex)
+//        }
+//    }
+//
+//    func insertArrangedSubview(_ view: UIView?, before: UIView?) {
+//        guard let before = before, let view = view else { return }
+//        guard let targetIndex = arrangedSubviews.firstIndex(of: before) else { return }
+//        if targetIndex > 0 {
+//            insertArrangedSubview(view, at: targetIndex)
+//        }
+//    }
+//
+//    func removeAllArrangedSubviews() {
+//        arrangedSubviews.forEach { removeArrangedSubview($0) }
+//    }
+//
+//    func setHidden(_ isHidden: Bool, arrangedSubview: UIView?) {
+//        guard let arrangedSubview = arrangedSubview else { return }
+//        if #available(iOS 11.0, *) {
+//            arrangedSubview.isHidden = isHidden
+//        } else {
+//            arrangedSubview.isHidden = isHidden
+//            if let index = self.arrangedSubviews.firstIndex(of: arrangedSubview) {
+//                let nextIndex = index+1
+//                if nextIndex < self.arrangedSubviews.count, let separatorView = self.arrangedSubviews[nextIndex] as? DZMockView {
+//                    separatorView.isHidden = isHidden
+//                }
+//
+//                if isHidden {
+//                    for view in self.arrangedSubviews.reversed() {
+//                        if view.isHidden == isHidden {
+//                            continue
+//                        }
+//                        if view is DZMockView {
+//                            view.isHidden = isHidden
+//                        }
+//                        break
+//                    }
+//                }
+//                else {
+//                    let preIndex = index-1
+//                    if preIndex >= 0, let separatorView = self.arrangedSubviews[preIndex] as? DZMockView {
+//                        separatorView.isHidden = isHidden
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//}
+//

@@ -13,6 +13,10 @@ open class DeclarativeViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         context = DZContext(rootWidget: build())
+        view.addSubview(context.rootView)
+        context.rootView.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
     }
     public func rebuild(_ block: () -> Void) {
         block()

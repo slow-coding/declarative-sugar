@@ -13,6 +13,9 @@ open class DeclarativeView: UIView {
     override open func draw(_ rect: CGRect) {
         super.draw(rect)
         context = DZContext(rootWidget: build())
+        addSubview(context.rootView)
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
     }
     public func rebuild(_ block: () -> Void) {
         block()
