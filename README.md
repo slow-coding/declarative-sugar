@@ -8,6 +8,10 @@
 
 ![](screenshot.png)
 
+**Comparing to Flutter**
+
+![](2019-08-07-11-26-37.png)
+
 ## 1.Feature List
 
 - [x] Declarative UI
