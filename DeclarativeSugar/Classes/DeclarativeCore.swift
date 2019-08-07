@@ -38,32 +38,6 @@ extension DZStackableWidget {
     }
 }
 
-extension UIEdgeInsets {
-    
-    public static func only(left: CGFloat = 0,
-                            top: CGFloat = 0,
-                            right: CGFloat = 0,
-                            bottom: CGFloat = 0) -> UIEdgeInsets {
-        var edgeInsets = UIEdgeInsets()
-        edgeInsets.left = left
-        edgeInsets.top = top
-        edgeInsets.right = right
-        edgeInsets.bottom = bottom
-        return edgeInsets
-    }
-    
-    public static func fromLTRB(left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat) -> UIEdgeInsets {
-        return only(left: left, top: top, right: right, bottom: bottom)
-    }
-    
-    public static func all(_ value: CGFloat) -> UIEdgeInsets {
-        return only(left: value, top: value, right: value, bottom: value)
-    }
-    
-    public static func symmetric(vertical: CGFloat = 0, horizontal: CGFloat = 0) -> UIEdgeInsets {
-        return only(left: horizontal, top: vertical, right: horizontal, bottom: vertical)
-    }
-}
 
 public class DZSpacer: UIView {
     
@@ -136,8 +110,8 @@ public class DZRow: UIView, DZStackableWidget {
     public var stackView = UIStackView()
     public init(mainAxisAlignment: UIStackView.Distribution = .fill,
                 crossAxisAlignment: UIStackView.Alignment = .leading,
-                children: [DZWidget]) {
-        self.children = children
+                children: [DZWidget?]) {
+        self.children = children.compactMap {$0}
         super.init(frame: .zero)
         
         addSubview(stackView)
@@ -161,15 +135,15 @@ public class DZColumn: UIView, DZStackableWidget {
     public var children: [DZWidget]
     public var stackView = UIStackView()
     
-    public init(mainAxisAlignment: UIStackView.Distribution = .fill,
-                crossAxisAlignment: UIStackView.Alignment = .top,
-                children: [DZWidget])  {
-        self.children = children
+    public init(mainAxisAlignment: UIStackView.Distribution? = .fill,
+                crossAxisAlignment: UIStackView.Alignment? = .fill,
+                children: [DZWidget?])  {
+        self.children = children.compactMap {$0}
         super.init(frame: .zero)
         
         addSubview(stackView)
-        stackView.alignment = crossAxisAlignment
-        stackView.distribution = mainAxisAlignment
+        stackView.alignment = crossAxisAlignment ?? .fill
+        stackView.distribution = mainAxisAlignment ?? .fill
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[stackView]|", options: .directionMask, metrics: nil, views: ["stackView":stackView]))
@@ -183,13 +157,47 @@ public class DZColumn: UIView, DZStackableWidget {
 }
 
 
+
+public struct DZEdgeInsets {
+    
+    public var left: CGFloat?
+    public var top: CGFloat?
+    public var right: CGFloat?
+    public var bottom: CGFloat?
+    public static func only(left: CGFloat? = nil,
+                            top: CGFloat? = nil,
+                            right: CGFloat? = nil,
+                            bottom: CGFloat? = nil) -> DZEdgeInsets {
+        var edgeInsets = DZEdgeInsets()
+        edgeInsets.left = left
+        edgeInsets.top = top
+        edgeInsets.right = right
+        edgeInsets.bottom = bottom
+        return edgeInsets
+    }
+    
+    public static func fromLTRB(left: CGFloat?, top: CGFloat?, right: CGFloat?, bottom: CGFloat?) -> DZEdgeInsets {
+        return only(left: left, top: top, right: right, bottom: bottom)
+    }
+    
+    public static func all(_ value: CGFloat) -> DZEdgeInsets {
+        return only(left: value, top: value, right: value, bottom: value)
+    }
+    
+    public static func symmetric(vertical: CGFloat? = nil, horizontal: CGFloat? = nil) -> DZEdgeInsets {
+        return only(left: horizontal, top: vertical, right: horizontal, bottom: vertical)
+    }
+    
+}
+
+
 public class DZPadding: UIView, DZSingleChildWidget {
     
-    public var edgeInsets = UIEdgeInsets()
+    public var edgeInsets = DZEdgeInsets()
     
     public var child: DZWidget
     
-    required public init(edgeInsets: UIEdgeInsets,
+    required public init(edgeInsets: DZEdgeInsets,
                          child: DZWidget)  {
         self.child = child
         self.edgeInsets = edgeInsets
@@ -198,14 +206,29 @@ public class DZPadding: UIView, DZSingleChildWidget {
         
         addSubview(child)
         child.translatesAutoresizingMaskIntoConstraints = false
-        let metrics = [
-            "left": edgeInsets.left,
-            "right": edgeInsets.right,
-            "top": edgeInsets.top,
-            "bottom": edgeInsets.bottom,
-        ]
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[child]-bottom-|", options: .directionMask, metrics: metrics, views: ["child":child]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-left-[child]-right-|", options: .directionMask, metrics: metrics, views: ["child":child]))
+        
+        if edgeInsets.left != nil {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-left-[child]", options: .directionMask, metrics: [
+                "left": edgeInsets.left ?? 0,
+                ], views: ["child":child]))
+        }
+        if edgeInsets.right != nil {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[child]-right-|", options: .directionMask, metrics: [
+                "right": edgeInsets.right ?? 0,
+                ], views: ["child":child]))
+        }
+        
+        if edgeInsets.top != nil {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[child]", options: .directionMask, metrics: [
+                "top": edgeInsets.top ?? 0,
+                ], views: ["child":child]))
+        }
+        
+        if edgeInsets.bottom != nil {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[child]-bottom-|", options: .directionMask, metrics: [
+                "bottom": edgeInsets.bottom ?? 0,
+                ], views: ["child":child]))
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -290,7 +313,7 @@ public class DZSizedBox: UIView, DZSingleChildWidget {
 class DZMockView: UIView { }
 
 public extension UIStackView {
-
+    
     // How can I create UIStackView with variable spacing between views?
     // https://stackoverflow.com/questions/32999159/how-can-i-create-uistackview-with-variable-spacing-between-views
     func addCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
@@ -316,17 +339,17 @@ public extension UIStackView {
             }
         }
     }
-
+    
     func removeCustomSpacing(after arrangedSubview: UIView) {
         addCustomSpacing(0, after: arrangedSubview)
     }
-
+    
     func addArrangedSubviews(_ views: [UIView?]) {
         views
             .compactMap({ $0 })
             .forEach { addArrangedSubview($0) }
     }
-
+    
     func insertArrangedSubview(_ view: UIView?, after: UIView?) {
         guard let after = after, let view = view else { return }
         guard let targetIndex = arrangedSubviews.firstIndex(of: after) else { return }
@@ -334,7 +357,7 @@ public extension UIStackView {
             insertArrangedSubview(view, at: targetIndex)
         }
     }
-
+    
     func insertArrangedSubview(_ view: UIView?, before: UIView?) {
         guard let before = before, let view = view else { return }
         guard let targetIndex = arrangedSubviews.firstIndex(of: before) else { return }
@@ -342,11 +365,11 @@ public extension UIStackView {
             insertArrangedSubview(view, at: targetIndex)
         }
     }
-
+    
     func removeAllArrangedSubviews() {
         arrangedSubviews.forEach { removeArrangedSubview($0) }
     }
-
+    
     func setHidden(_ isHidden: Bool, arrangedSubview: UIView?) {
         guard let arrangedSubview = arrangedSubview else { return }
         if #available(iOS 11.0, *) {
@@ -358,7 +381,7 @@ public extension UIStackView {
                 if nextIndex < self.arrangedSubviews.count, let separatorView = self.arrangedSubviews[nextIndex] as? DZMockView {
                     separatorView.isHidden = isHidden
                 }
-
+                
                 if isHidden {
                     for view in self.arrangedSubviews.reversed() {
                         if view.isHidden == isHidden {
@@ -379,6 +402,6 @@ public extension UIStackView {
             }
         }
     }
-
+    
 }
 

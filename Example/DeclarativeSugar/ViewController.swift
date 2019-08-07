@@ -30,7 +30,7 @@ class ViewController: DeclarativeViewController {
                             widget: DZColumn(
                                 children: [
                                     DZPadding(
-                                        edgeInsets: UIEdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                        edgeInsets: DZEdgeInsets.symmetric(vertical: 10, horizontal: 20),
                                         child: UILabel().then {
                                             $0.numberOfLines = 0
                                             $0.text =
@@ -40,7 +40,7 @@ class ViewController: DeclarativeViewController {
                                     }),
                                     DZSpacer(10),
                                     DZPadding(
-                                        edgeInsets: UIEdgeInsets.only(left: 15),
+                                        edgeInsets: DZEdgeInsets.all(15),
                                         child:UISwitch()
                                     ),
                                     DZSpacer(20),
@@ -50,7 +50,7 @@ class ViewController: DeclarativeViewController {
                     cells: [
                         DZCell(
                             widget: DZPadding(
-                                edgeInsets: UIEdgeInsets.all(16),
+                                edgeInsets: DZEdgeInsets.all(16),
                                 child: DZRow(
                                     mainAxisAlignment: UIStackView.Distribution.fillProportionally,
                                     children: [

@@ -49,7 +49,7 @@ public class DZCell: UIView {
     public var willDisplay: ((IndexPath) -> Void)?
     public var shouldHighlightRow: ((IndexPath) -> Bool)?
     public var cellHeight: CGFloat? = nil
-
+    
     private var currentCell: UITableViewCell? = nil
     
     public init(configureCell: ((UITableViewCell) -> Void)? = nil,
@@ -94,7 +94,7 @@ public class DZListView: UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: .directionMask, metrics: nil, views: ["tableView":tableView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: .directionMask, metrics: nil, views: ["tableView":tableView]))
     }
-
+    
     public convenience init(tableView: UITableView, cells: [DZCell]) {
         self.init(tableView: tableView, sections: [DZSection(cells: cells)])
     }
@@ -114,7 +114,7 @@ extension DZListView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return sections[section].footerView
     }
-
+    
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section].headerTitle
     }
