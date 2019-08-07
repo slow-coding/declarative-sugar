@@ -126,7 +126,7 @@ DZSizedBox(
 )
 ```
 
-### Spacer
+### 3.6 Spacer
 
 For `Row`: it is a `SizedBox` with width value.
 
@@ -152,11 +152,11 @@ DZColumn(
 )
 ```
 
-### ListView
+### 3.7 ListView
 
 Generally, you don't need to deal with delegate/datasource pattern and UITableViewCell
 
-#### Static ListView
+Static ListView
 
 ```
  DZListView(
@@ -176,7 +176,7 @@ Generally, you don't need to deal with delegate/datasource pattern and UITableVi
     ])
 ```
 
-#### Dynamic ListView
+Dynamic ListView
 
 Using `rows:` for single section list view
 
@@ -189,9 +189,9 @@ return DZListView(
 )
 ```
 
-## Rebuild
+## 4. Reloading
 
-### Update state (reset completely)
+### 4.1 Update state (reset completely)
 
 ``` swift
 self.rebuild {
@@ -199,7 +199,7 @@ self.rebuild {
 }
 ```
 
-### Update state (incremental)
+### 4.2 Update state (incremental)
 
 ``` swift
 UIView.animate(withDuration: 0.5) {
@@ -210,15 +210,15 @@ UIView.animate(withDuration: 0.5) {
 }
 ```
 
-## Code Structure
+## 5 Code Structure
 
 ![](2019-08-07-08-47-54.png)
 
-## Example
+## 6 Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Installation
+## 7 Installation
 
 DeclarativeSugar is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
@@ -227,10 +227,10 @@ it, simply add the following line to your Podfile:
 pod 'DeclarativeSugar'
 ```
 
-## Author
+## 8 Author
 
 Darren Zheng 623767307@qq.com
 
-## License
+## 9 License
 
 DeclarativeSugar is available under the MIT license. See the LICENSE file for more info.
