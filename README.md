@@ -37,6 +37,13 @@ But I would suggest using [Then](https://github.com/devxoul/Then) for writing cl
 
 The other goal of this wrapper is to remove the needs of using SnapKit or other autolayout codes.
 
+**Why not using SwiftUI?**
+
+If you can use SwiftUI, then this wrapper is *redundant*. 
+
+But SwiftUI requires iOS 13+, if your project targets minimal iOS 9+, **DeclarativeSugar** is here for you. 
+
+
 ## 2.Setup
 
 ### 2.1 Inherite `DeclarativeViewController` or `DeclarativeView`
