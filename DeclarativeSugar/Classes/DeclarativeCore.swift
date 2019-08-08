@@ -309,6 +309,70 @@ public class DZSizedBox: UIView, DZSingleChildWidget {
     }
 }
 
+public class DZStack: UIView, DZSingleChildWidget {
+    
+    public var child: DZWidget
+    
+    required public init(
+        edgeInsets: DZEdgeInsets? = nil,
+        direction: DZCenterDirection? = nil,
+        base: DZWidget,
+        target: DZWidget)  {
+        self.child = base
+        super.init(frame: .zero)
+        
+        
+        addSubview(base)
+        base.translatesAutoresizingMaskIntoConstraints = false
+        
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[base]|", options: .directionMask, metrics: nil, views: ["base":base]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[base]|", options: .directionMask, metrics: nil, views: ["base":base]))
+        
+        addSubview(target)
+        target.translatesAutoresizingMaskIntoConstraints = false
+        
+        if direction != .vertical  {
+            let centerX = NSLayoutConstraint(item: self, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: target, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+            addConstraint(centerX)
+        }
+        
+        if direction != .horizontal {
+            let centerY = NSLayoutConstraint(item: self, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: target, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
+            addConstraint(centerY)
+        }
+        
+        guard let edgeInsets = edgeInsets else {
+            return
+        }
+        if edgeInsets.left != nil {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-left-[target]", options: .directionMask, metrics: [
+                "left": edgeInsets.left ?? 0,
+                ], views: ["target":target]))
+        }
+        if edgeInsets.right != nil {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[target]-right-|", options: .directionMask, metrics: [
+                "right": edgeInsets.right ?? 0,
+                ], views: ["target":target]))
+        }
+        
+        if edgeInsets.top != nil {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[target]", options: .directionMask, metrics: [
+                "top": edgeInsets.top ?? 0,
+                ], views: ["target":target]))
+        }
+        
+        if edgeInsets.bottom != nil {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[target]-bottom-|", options: .directionMask, metrics: [
+                "bottom": edgeInsets.bottom ?? 0,
+                ], views: ["target":target]))
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 
 class DZMockView: UIView { }
 

@@ -191,11 +191,24 @@ Dynamic ListView
 Using `rows:` for single section list view
 
 ``` swift
-return DZListView(
+DZListView(
     tableView: UITableView(),
     cells: ["a", "b", "c", "d", "e"].map { model in 
         DZCell(widget: UILabel().then { $0.text = model })
     }
+)
+```
+
+### 3.8 Stack
+
+A Flutter stack replacement, not `UIStackView`.
+
+``` swift
+DZStack(
+    edgeInsets: DZEdgeInsets.only(bottom: 40), 
+    direction: .horizontal, // center direction
+    base: YourViewBelow,
+    target: YourViewAbove
 )
 ```
 
