@@ -28,6 +28,7 @@
 - [x] `ListView` (`UITableView` in UIKit) #2019-08-03
 - [x] `Padding` #2019-08-05
 - [x] `Center`, `SizedBox` #2019-08-07
+- [x] `Stack`, `Row/Column` now has nullable children [DZWidget?] #2019-08-08
 
 **Depolyment**: iOS 9, Swift 5  
 **Dependency**: UIKit (*nothing else*)  
