@@ -25,10 +25,10 @@
 - [x] composable view-hierachy as same as `UIStackView`
 - [x] entry point `build()` and update method `rebuild()`   
 - [x] `Row/Column`, `Spacer` 
-- [x] #2019-08-03 `ListView` (`UITableView` in UIKit) 
-- [x] #2019-08-05 `Padding` 
-- [x] #2019-08-07 `Center`, `SizedBox` 
-- [x] #2019-08-08 `Stack`, `Row/Column` now has nullable children `[DZWidget?]` 
+- [x] `ListView` (`UITableView` in UIKit) *#2019-08-03*
+- [x] `Padding` *#2019-08-05* 
+- [x] `Center`, `SizedBox` *#2019-08-07* 
+- [x] `Stack`, `Row/Column` now has nullable children `[DZWidget?]` *#2019-08-08*
 
 **Depolyment**: iOS 9, Swift 5  
 **Dependency**: UIKit (*nothing else*)  
