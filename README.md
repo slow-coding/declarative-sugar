@@ -34,7 +34,8 @@
 **Dependency**: UIKit (*nothing else*)  
 
 But I would suggest using [Then](https://github.com/devxoul/Then) for writing cleaner initializer.
-The other goal is to remove the needs of using SnapKit or other autolayout framework.
+
+The other goal of this wrapper is to remove the needs of using SnapKit or other autolayout codes.
 
 ## 2.Setup
 
