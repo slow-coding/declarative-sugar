@@ -29,6 +29,7 @@
 - [x] `Padding` *#2019-08-05* 
 - [x] `Center`, `SizedBox` *#2019-08-07* 
 - [x] `Stack`, `Row/Column` now has nullable children `[DZWidget?]` *#2019-08-08*
+- [x] `Gesture`, `AppBar`
 
 **Depolyment**: iOS 9, Swift 5  
 **Dependency**: UIKit (*nothing else*)  
@@ -218,6 +219,31 @@ DZStack(
     direction: .horizontal, // center direction
     base: YourViewBelow,
     target: YourViewAbove
+)
+```
+
+### 3.9 Gesture
+
+``` swift
+DZGestureDetector(
+    onTap: { print("label tapped") },
+    child: UILabel().then { $0.text = "Darren"}
+)
+
+DZGestureDetector(
+    onTap: { print("button tapped") },
+    child: UIButton().then {
+        $0.setTitle("button", for: UIControl.State.normal)
+        $0.setTitleColor(UIColor.red, for: UIControl.State.normal)
+}),
+```
+
+### 3.10 AppBar
+
+``` swift
+DZAppBar(
+    title: "App Bar Title",
+    child: ... 
 )
 ```
 

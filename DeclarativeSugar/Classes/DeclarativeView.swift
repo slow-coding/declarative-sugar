@@ -13,14 +13,16 @@ open class DeclarativeView: UIView {
     override open func draw(_ rect: CGRect) {
         super.draw(rect)
         context = DZContext(rootWidget: build())
-        addSubview(context.rootView)
-        context.rootView.translatesAutoresizingMaskIntoConstraints = false
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
+        guard let rootView = context.rootView else { return }
+        addSubview(rootView)
+        rootView.translatesAutoresizingMaskIntoConstraints = false
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
     }
     public func rebuild(_ block: () -> Void) {
         block()
-        context.rootView.removeFromSuperview()
+        guard let rootView = context.rootView else { return }
+        rootView.removeFromSuperview()
         context = DZContext(rootWidget: build())
     }
 }

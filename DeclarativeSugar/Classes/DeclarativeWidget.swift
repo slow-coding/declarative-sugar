@@ -5,10 +5,10 @@
 //  Created by Darren Zheng on 2019/8/9.
 //
 
-import Foundation
+import UIKit
 
 
-public class DZSpacer: DZNonViewWidget {
+public class DZSpacer: DZWidget {
     
     public var spacing: CGFloat
     
@@ -16,3 +16,4 @@ public class DZSpacer: DZNonViewWidget {
         self.spacing = spacing
     }
 }
+

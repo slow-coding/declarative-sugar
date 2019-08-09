@@ -13,14 +13,19 @@ open class DeclarativeViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         context = DZContext(rootWidget: build())
-        view.addSubview(context.rootView)
-        context.rootView.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":context.rootView]))
+        guard let rootView = context.rootView else { return }
+        view.addSubview(rootView)
+        rootView.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
+        if let appBar = context.rootWidget as? DZAppBar {
+            self.title = appBar.title
+        }
     }
     public func rebuild(_ block: () -> Void) {
         block()
-        context.rootView.removeFromSuperview()
+        guard let rootView = context.rootView else { return }
+        rootView.removeFromSuperview()
         context = DZContext(rootWidget: build())
     }
 }

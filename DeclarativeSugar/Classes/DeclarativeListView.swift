@@ -177,7 +177,7 @@ public class DZListBaseCell: UITableViewCell {
     init(row: DZCell, style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         self.row = row
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        let rootView = DZContext(rootWidget: row.widget).rootView
+        guard let rootView = DZContext(rootWidget: row.widget).rootView else { return }
         contentView.addSubview(rootView)
         rootView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))

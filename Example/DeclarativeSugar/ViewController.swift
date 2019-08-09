@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 import DeclarativeSugar
 import Then
 
@@ -18,7 +17,9 @@ import Then
 class ViewController: DeclarativeViewController {
     
     override func build() -> DZWidget {
-        return DZListView(
+        return DZAppBar(
+            title: "App Bar Title",
+            child: DZListView(
             tableView: UITableView().then { $0.separatorStyle = .singleLine },
             sections: [
                 DZSection(
@@ -58,14 +59,22 @@ class ViewController: DeclarativeViewController {
                                         DZSpacer(20),
                                         DZColumn(
                                             children: [
-                                                UILabel().then { $0.text = "Darren"},
+                                                DZGestureDetector(
+                                                    onTap: { print("label tapped") },
+                                                    child: UILabel().then { $0.text = "Darren"}),
+                                                DZGestureDetector(
+                                                    onTap: { print("button tapped") },
+                                                    child: UIButton().then {
+                                                        $0.setTitle("button", for: UIControl.State.normal)
+                                                        $0.setTitleColor(UIColor.red, for: UIControl.State.normal)
+                                                }),
                                                 DZSpacer(5),
                                                 UILabel().then { $0.text = "Dart is way better than Swift"; $0.textColor = .gray },
                                             ])
                                     ])
                         )).then { $0.configureCell = { $0.accessoryType = .disclosureIndicator } }
                     ]).then { $0.headerTitle = "section 1"; $0.headerHeight = 30 }
-            ])
+            ]))
     }
     
 }
