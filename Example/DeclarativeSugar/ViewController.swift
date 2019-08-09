@@ -64,10 +64,10 @@ class ViewController: DeclarativeViewController {
                                                     child: UILabel().then { $0.text = "Darren"}),
                                                 DZGestureDetector(
                                                     onTap: { print("button tapped") },
-                                                    child: UIButton().then {
+                                                    child:  DZSizedBox(child:DZSizedBox(child:  UIButton().then {
                                                         $0.setTitle("button", for: UIControl.State.normal)
                                                         $0.setTitleColor(UIColor.red, for: UIControl.State.normal)
-                                                }),
+                                                    }))),
                                                 DZSpacer(5),
                                                 UILabel().then { $0.text = "Dart is way better than Swift"; $0.textColor = .gray },
                                             ])

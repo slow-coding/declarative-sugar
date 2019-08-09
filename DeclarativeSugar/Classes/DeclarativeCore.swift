@@ -4,7 +4,45 @@
 
 import UIKit
 
+/// Root type, nothing fancy.
 public protocol DZWidget {}
+
+extension DZWidget {
+    
+    // find first UIView in view hierachy
+    public func toView(_ widget: DZWidget? = nil) -> UIView? {
+        
+        if let view = self as? UIView {
+            return view
+        }
+        
+        if let sChild = (widget ?? self) as? DZSingleChildWidget {
+            if let view = sChild.child as? UIView {
+                return view
+            }
+            else if sChild.child is DZSingleChildWidget {
+                return toView(sChild.child)
+            }
+        }
+        
+        return nil
+    }
+    
+    // find innermost UIView in view hierachy
+    // cast return value to real type: UIView or UIView's subtypes
+    public func findRootView(_ widget: DZWidget? = nil) -> DZWidget? {
+        if let sChild = (widget ?? self) as? DZSingleChildWidget {
+            if sChild.child is DZSingleChildWidget {
+                return findRootView(sChild.child)
+            }
+            else {
+                return sChild.child
+            }
+        }
+        return self
+    }
+    
+}
 
 // A widget can be a UIView
 extension UIView: DZWidget {}
@@ -21,13 +59,20 @@ public protocol DZStackableWidget: DZWidget {
 }
 
 extension DZStackableWidget {
+    
     public func buildStackView() {
         var previousView: UIView?
-        for viewType in children {
+        for (index, viewType) in children.enumerated() {
             if let spacing = viewType as? DZSpacer {
                 let spacingValue = spacing.spacing
-                if let previousView = previousView {
-                    stackView.addCustomSpacing(spacingValue, after: previousView)
+                if let previousViewValue = previousView {
+                    stackView.addCustomSpacing(spacingValue, after: previousViewValue)
+                    if index == children.count - 1 {
+                        let mockView = UIView()
+                        stackView.addArrangedSubview(mockView)
+                        previousView = mockView
+                        stackView.addCustomSpacing(spacingValue, after: mockView)
+                    }
                 }
                 else {
                     let mockView = UIView()
@@ -47,10 +92,12 @@ extension DZStackableWidget {
             }
         }
     }
+    
 }
 
-/// Dealing with UIStackView
+/// A context dealing with UIStackView
 public class DZContext {
+    
     public var rootWidget: DZWidget
     
     public init(rootWidget: DZWidget) {

@@ -51,7 +51,7 @@ public class DZPadding: UIView, DZSingleChildWidget {
         self.edgeInsets = edgeInsets
         super.init(frame: .zero)
         
-        guard let child = child as? UIView else {
+        guard let child = child.toView() else {
             return
         }
         
@@ -101,7 +101,7 @@ public class DZCenter: UIView, DZSingleChildWidget {
         self.child = child
         super.init(frame: .zero)
         
-        guard let child = child as? UIView else {
+        guard let child = child.toView() else {
             return
         }
         
@@ -135,7 +135,7 @@ public class DZSizedBox: UIView, DZSingleChildWidget {
         self.child = child
         super.init(frame: .zero)
         
-        guard let child = child as? UIView else {
+        guard let child = child.toView() else {
             return
         }
         
@@ -180,7 +180,7 @@ public class DZStack: UIView, DZSingleChildWidget {
         self.child = base
         super.init(frame: .zero)
         
-        guard let base = base as? UIView, let target = target as? UIView else {
+        guard let base = base.toView(), let target = target.toView() else {
             return
         }
         
@@ -190,41 +190,41 @@ public class DZStack: UIView, DZSingleChildWidget {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[base]|", options: .directionMask, metrics: nil, views: ["base":base]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[base]|", options: .directionMask, metrics: nil, views: ["base":base]))
         
-        addSubview(target)
+        base.addSubview(target)
         target.translatesAutoresizingMaskIntoConstraints = false
         
-        if direction != .vertical  {
-            let centerX = NSLayoutConstraint(item: self, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: target, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-            addConstraint(centerX)
+        if direction != nil, direction != .vertical  {
+            let centerX = NSLayoutConstraint(item: base, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: target, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+            base.addConstraint(centerX)
         }
         
-        if direction != .horizontal {
-            let centerY = NSLayoutConstraint(item: self, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: target, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
-            addConstraint(centerY)
+        if direction != nil, direction != .horizontal {
+            let centerY = NSLayoutConstraint(item: base, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: target, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
+            base.addConstraint(centerY)
         }
         
         guard let edgeInsets = edgeInsets else {
             return
         }
         if edgeInsets.left != nil {
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-left-[target]", options: .directionMask, metrics: [
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-left-[target]", options: .directionMask, metrics: [
                 "left": edgeInsets.left ?? 0,
                 ], views: ["target":target]))
         }
         if edgeInsets.right != nil {
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[target]-right-|", options: .directionMask, metrics: [
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[target]-right-|", options: .directionMask, metrics: [
                 "right": edgeInsets.right ?? 0,
                 ], views: ["target":target]))
         }
         
         if edgeInsets.top != nil {
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[target]", options: .directionMask, metrics: [
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[target]", options: .directionMask, metrics: [
                 "top": edgeInsets.top ?? 0,
                 ], views: ["target":target]))
         }
         
         if edgeInsets.bottom != nil {
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[target]-bottom-|", options: .directionMask, metrics: [
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[target]-bottom-|", options: .directionMask, metrics: [
                 "bottom": edgeInsets.bottom ?? 0,
                 ], views: ["target":target]))
         }
@@ -249,11 +249,11 @@ public class DZAppBar: DZSingleChildWidget {
     }
 }
 
-public class DZGestureDetector: DZSingleChildWidget {
+public class DZGestureDetector: UIView, DZSingleChildWidget {
     
     public var child: DZWidget
     var onTap: (() -> Void)?
-
+    
     required public init(
         onTap: (() -> Void)?,
         child: DZWidget
@@ -261,14 +261,34 @@ public class DZGestureDetector: DZSingleChildWidget {
         self.child = child
         self.onTap = onTap
         
-        if let btn = child as? UIButton {
-            btn.addTarget(self, action: #selector(selectorOnTap), for: UIControl.Event.touchUpInside)
+        super.init(frame: .zero)
+        
+        guard let child = child.toView() else {
+            return
         }
-        else if let view = child as? UIView {
+        addSubview(child)
+        child.translatesAutoresizingMaskIntoConstraints = false
+        
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[child]|", options: .directionMask, metrics: nil, views: ["child":child]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[child]|", options: .directionMask, metrics: nil, views: ["child":child]))
+        
+        guard let view = child.findRootView() else {
+            return
+        }
+        if let btn = view as? UIButton {
+            btn.addTarget(self, action: #selector(DZGestureDetector.selectorOnTap), for: UIControl.Event.touchUpInside)
+        }
+        else if let view = view as? UIView {
             view.isUserInteractionEnabled = true
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectorOnTap))
             view.addGestureRecognizer(tapRecognizer)
         }
+        
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc func selectorOnTap() {
