@@ -1,13 +1,18 @@
 //
 //  UIStackView+DeclarativeSugar.swift
-//  DeclarativeSugar
+//  Test
 //
-//  Created by Darren Zheng on 2019/8/9.
+//  Created by Xu Zheng on 2019/8/10.
+//  Copyright © 2019 Xu Zheng. All rights reserved.
 //
 
 import UIKit
 
-class DZMockView: UIView { }
+class DZMockView: UIView {
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 0.00001, height:  0.00001) // this hacky code is just for making compiler happy
+    }
+}
 
 public extension UIStackView {
     
@@ -101,4 +106,3 @@ public extension UIStackView {
     }
     
 }
-

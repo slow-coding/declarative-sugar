@@ -53,7 +53,8 @@ class ViewController: DeclarativeViewController {
                             widget: DZPadding(
                                 edgeInsets: DZEdgeInsets.all(16),
                                 child: DZRow(
-                                    mainAxisAlignment: UIStackView.Distribution.fillProportionally,
+                                    mainAxisAlignment: UIStackView.Distribution.fill,
+                                    crossAxisAlignment: .center,
                                     children: [
                                         DZSizedBox(width: 50, height: 50, child: UIImageView(image: UIImage(named: "icon"))),
                                         DZSpacer(20),

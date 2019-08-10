@@ -75,21 +75,17 @@ extension DZStackableWidget {
                     }
                 }
                 else {
-                    let mockView = UIView()
+                    let mockView = DZMockView()
                     stackView.addArrangedSubview(mockView)
                     previousView = mockView
                     stackView.addCustomSpacing(spacingValue, after: mockView)
                 }
             }
-            if let view = viewType as? UIView {
+            if let view = viewType.toView()  {
                 stackView.addArrangedSubview(view)
                 previousView = view
             }
-            else if let sChild = viewType as? DZSingleChildWidget,
-                let view = sChild.child as? UIView {
-                stackView.addArrangedSubview(view)
-                previousView = view
-            }
+            
         }
     }
     

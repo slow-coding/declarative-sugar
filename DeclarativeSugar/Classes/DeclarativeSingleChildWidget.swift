@@ -80,11 +80,18 @@ public class DZPadding: UIView, DZSingleChildWidget {
                 "bottom": edgeInsets.bottom ?? 0,
                 ], views: ["child":child]))
         }
+        
+        
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public override var intrinsicContentSize: CGSize {
+        return child.toView()?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize) ?? .zero
+    }
+    
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 public enum DZCenterDirection {
@@ -117,6 +124,10 @@ public class DZCenter: UIView, DZSingleChildWidget {
             let centerY = NSLayoutConstraint(item: self, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: child, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
             addConstraint(centerY)
         }
+    }
+    
+    public override var intrinsicContentSize: CGSize {
+        return child.toView()?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize) ?? .zero
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -163,9 +174,14 @@ public class DZSizedBox: UIView, DZSingleChildWidget {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: heightVFL, options: .directionMask, metrics: nil, views: ["child":child]))
     }
     
+    public override var intrinsicContentSize: CGSize {
+        return child.toView()?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize) ?? .zero
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 public class DZStack: UIView, DZSingleChildWidget {
@@ -230,6 +246,10 @@ public class DZStack: UIView, DZSingleChildWidget {
         }
     }
     
+    public override var intrinsicContentSize: CGSize {
+        return child.toView()?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize) ?? .zero
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -285,6 +305,10 @@ public class DZGestureDetector: UIView, DZSingleChildWidget {
         }
         
         
+    }
+    
+    public override var intrinsicContentSize: CGSize {
+        return child.toView()?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize) ?? .zero
     }
     
     required init?(coder aDecoder: NSCoder) {
