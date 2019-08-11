@@ -44,26 +44,23 @@ public class DZCell: UIView {
     public var widget: DZWidget
     public var configureCell: ((UITableViewCell) -> Void)?
     public var identifier: String
-    public var cellClass: AnyClass?
     public var onTap: ((IndexPath) -> Void)?
     public var willDisplay: ((IndexPath) -> Void)?
     public var shouldHighlightRow: ((IndexPath) -> Bool)?
     public var cellHeight: CGFloat? = nil
     
-    private var currentCell: UITableViewCell? = nil
+    public var currentCell: UITableViewCell? = nil
     
     public init(configureCell: ((UITableViewCell) -> Void)? = nil,
                 identifier: String = String(Int.random(in: 0 ... 9999)),
-                cellClass: AnyClass? = nil,
-                onTap: ((IndexPath) -> Void)? = nil,
                 willDisplay: ((IndexPath) -> Void)? = nil,
                 shouldHighlightRow: ((IndexPath) -> Bool)? = nil,
                 cellHeight: CGFloat? = nil,
+                onTap: ((IndexPath) -> Void)? = nil,
                 widget: DZWidget) {
         self.widget = widget
         self.configureCell = configureCell
         self.identifier = identifier
-        self.cellClass = cellClass
         self.onTap = onTap
         self.willDisplay = willDisplay
         self.shouldHighlightRow = shouldHighlightRow
@@ -143,7 +140,7 @@ extension DZListView: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         let row = sections[indexPath.section].cells[indexPath.row]
-        return row.shouldHighlightRow?(indexPath) ?? false
+        return row.shouldHighlightRow?(indexPath) ?? true
     }
     
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -166,6 +163,7 @@ extension DZListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let row = sections[indexPath.section].cells[indexPath.row]
         row.onTap?(indexPath)
     }
