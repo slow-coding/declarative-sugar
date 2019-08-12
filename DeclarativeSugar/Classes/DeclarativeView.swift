@@ -12,6 +12,10 @@ open class DeclarativeView: UIView {
     open lazy var context: DZContext = DZContext(rootWidget: build())
     override open func draw(_ rect: CGRect) {
         super.draw(rect)
+        setup()
+    }
+    
+    private func setup() {
         context = DZContext(rootWidget: build())
         guard let rootView = context.rootView else { return }
         addSubview(rootView)
@@ -19,10 +23,11 @@ open class DeclarativeView: UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
     }
+    
     public func rebuild(_ block: (() -> Void)? = nil) {
         block?()
         guard let rootView = context.rootView else { return }
         rootView.removeFromSuperview()
-        context = DZContext(rootWidget: build())
+        setup()
     }
 }

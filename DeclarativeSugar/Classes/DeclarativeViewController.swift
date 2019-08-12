@@ -12,6 +12,14 @@ open class DeclarativeViewController: UIViewController {
     open lazy var context: DZContext = DZContext(rootWidget: build())
     override open func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        if let appBar = context.rootWidget as? DZAppBar {
+            self.title = appBar.title
+            self.navigationItem.rightBarButtonItem = appBar.rightBarButtonItem
+        }
+    }
+    
+    private func setup()  {
         context = DZContext(rootWidget: build())
         guard let rootView = context.rootView else { return }
         view.addSubview(rootView)
@@ -19,15 +27,12 @@ open class DeclarativeViewController: UIViewController {
         rootView.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
-        if let appBar = context.rootWidget as? DZAppBar {
-            self.title = appBar.title
-            self.navigationItem.rightBarButtonItem = appBar.rightBarButtonItem
-        }
     }
+    
     public func rebuild(_ block: (() -> Void)? = nil) {
         block?()
         guard let rootView = context.rootView else { return }
         rootView.removeFromSuperview()
-        context = DZContext(rootWidget: build())
+        setup()
     }
 }
