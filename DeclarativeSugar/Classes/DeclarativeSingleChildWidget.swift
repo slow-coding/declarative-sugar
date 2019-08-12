@@ -259,13 +259,16 @@ public class DZAppBar: DZSingleChildWidget {
     
     public var child: DZWidget
     public var title: String?
+    public var rightBarButtonItem: UIBarButtonItem?
     
     required public init(
         title: String? = nil,
+        rightBarButtonItem: UIBarButtonItem? = nil,
         child: DZWidget
         )  {
         self.child = child
         self.title = title
+        self.rightBarButtonItem = rightBarButtonItem
     }
 }
 

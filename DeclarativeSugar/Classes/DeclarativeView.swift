@@ -19,8 +19,8 @@ open class DeclarativeView: UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|", options: .directionMask, metrics: nil, views: ["rootView":rootView]))
     }
-    public func rebuild(_ block: () -> Void) {
-        block()
+    public func rebuild(_ block: (() -> Void)? = nil) {
+        block?()
         guard let rootView = context.rootView else { return }
         rootView.removeFromSuperview()
         context = DZContext(rootWidget: build())
