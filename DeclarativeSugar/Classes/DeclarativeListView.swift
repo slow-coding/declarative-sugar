@@ -23,8 +23,8 @@ public class DZSection: UIView {
                 footerTitle: String? = nil,
                 headerHeight: CGFloat? = 0,
                 footerHeight: CGFloat? = 0,
-                cells: [DZCell]) {
-        self.cells = cells
+                cells: [DZCell?]) {
+        self.cells = cells.compactMap({$0})
         self.headerView = headerView
         self.footerView = footerView
         self.headerTitle = headerTitle
@@ -79,8 +79,8 @@ public class DZListView: UIView {
     let sections: [DZSection]
     let tableView: UITableView
     
-    public init(tableView: UITableView, sections: [DZSection]) {
-        self.sections = sections
+    public init(tableView: UITableView, sections: [DZSection?]) {
+        self.sections = sections.compactMap({$0})
         self.tableView = tableView
         super.init(frame: .zero)
         tableView.delegate = self
