@@ -1,0 +1,6 @@
+framework module Pods_DeclarativeSugar_Example {
+  umbrella header "Pods-DeclarativeSugar_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
