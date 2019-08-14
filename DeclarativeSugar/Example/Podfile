@@ -1,0 +1,14 @@
+use_frameworks!
+platform :ios, '9.0'
+
+target 'DeclarativeSugar_Example' do
+  pod 'DeclarativeSugar', :path => '../'
+
+  target 'DeclarativeSugar_Tests' do
+    inherit! :search_paths
+
+    
+  end
+  pod 'Then'
+  pod 'SnapKit'
+end
