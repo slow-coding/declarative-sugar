@@ -252,7 +252,7 @@ DZAppBar(
 ### 4.1 Update state (reset completely)
 
 ``` swift
-self.rebuild {
+self.setState {
     self.hide = !self.hide
 }
 ```
