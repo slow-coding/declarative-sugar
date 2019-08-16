@@ -38,5 +38,4 @@ open class DeclarativeViewController: UIViewController {
             self.setup()
         }
     }
-
 }

@@ -149,3 +149,9 @@ public class DZContext {
     }
     
 }
+
+enum DZViewState<T> {
+    case none
+    case loading
+    case data(T?)
+}
